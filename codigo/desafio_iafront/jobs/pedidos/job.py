@@ -1,12 +1,11 @@
 import os
 import click
+import pandas as pd
 from datetime import timedelta
 
-from desafio_iafront.data.dataframe_utils import read_csv, read_partitioned_json
-from desafio_iafront.data.saving import save_partitioned
-from desafio_iafront.jobs.pedidos.contants import SAVING_PARTITIONS
-from desafio_iafront.jobs.pedidos.utils import _prepare
 
+from desafio_iafront.data.dataframe_utils import read_csv
+from utils import create_pedidos_df, create_visitas_df, save_prepared, merge_visita_produto
 
 @click.command()
 @click.option('--pedidos', type=click.Path(exists=True))
@@ -26,30 +25,38 @@ def main(pedidos, visitas, produtos, saida, data_inicial, data_final):
         hour_partitions = list(range(0, 23))
 
         for hour in hour_partitions:
-            hour_snnipet = f"hora={hour}"
-
-            data_str = data.strftime('%Y-%m-%d')
-            date_partition = f"data={data_str}"
-
-            visitas_partition = os.path.join(visitas, date_partition, hour_snnipet)
-            visitas_df = read_partitioned_json(visitas_partition)
-            visitas_df["product_id"] = visitas_df["product_id"].astype(str)
-            visitas_df["visit_id"] = visitas_df["visit_id"].astype(str)
-
-            pedidos_partition = os.path.join(pedidos, date_partition, hour_snnipet)
-            pedidos_df = read_partitioned_json(pedidos_partition)
-            pedidos_df["visit_id"] = pedidos_df["visit_id"].astype(str)
-
-            visita_com_produto_df = visitas_df.merge(produtos_df, how="inner", on="product_id", suffixes=("", "_off"))
-            visita_com_produto_e_conversao_df = visita_com_produto_df.merge(pedidos_df, how="left",
-                                                                            on="visit_id", suffixes=("", "_off"))
-
-            visita_com_produto_e_conversao_df["data"] = data_str
-            visita_com_produto_e_conversao_df["hora"] = hour
-
-            prepared = _prepare(visita_com_produto_e_conversao_df)
-            save_partitioned(prepared, saida, SAVING_PARTITIONS)
+            date_partition = method_name(data, hour, pedidos, produtos_df, saida, visitas)            
             print(f"Concluído para {date_partition} {hour}h")
+            
+
+def method_name(data: str, hour: int, pedidos: str, produtos_df: pd.DataFrame, saida: str, visitas: str) -> pd.DataFrame:
+    """[summary]
+
+    Args:
+        data (str): [description]
+        hour (int): [description]
+        pedidos (str): [description]
+        produtos_df (pd.DataFrame): [description]
+        saida (str): [description]
+        visitas (str): [description]
+
+    Returns:
+        pd.DataFrame: [description]
+    """
+    hour_snnipet = f"hora={hour}"
+    data_str = data.strftime('%Y-%m-%d')
+    date_partition = f"data={data_str}"
+    
+    visitas_df = create_visitas_df(date_partition, hour_snnipet, visitas)
+    
+    pedidos_df = create_pedidos_df(date_partition, hour_snnipet, pedidos)
+    
+    visita_com_produto_e_conversao_df = merge_visita_produto(data_str, hour, pedidos_df, produtos_df, visitas_df)
+    save_prepared(saida, visita_com_produto_e_conversao_df)
+
+    return date_partition
+            
+    
 
 
 if __name__ == '__main__':
