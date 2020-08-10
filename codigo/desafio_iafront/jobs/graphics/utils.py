@@ -13,6 +13,19 @@ def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
 
     return p
 
+def hist(dataframe: pd.DataFrame, x_axis, cluster_label, title="")
+    p = figure(title=title)
+
+    hist, edges = np.histogram(dataframe[z_axis], density=True, bins=50)
+    p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],
+           fill_color="navy", line_color="white", alpha=0.5)
+
+    p.y_range.start = 0
+    p.legend.location = "center_right"
+    p.legend.background_fill_color = "#fefefe"
+    p.xaxis.axis_label = x_axis
+    p.yaxis.axis_label = 'Frequência'
+    p.grid.grid_line_color="white"
 
 def _unique(original):
     return list(set(original))
