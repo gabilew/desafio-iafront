@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from bokeh.plotting import figure
 
 
@@ -13,10 +14,10 @@ def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
 
     return p
 
-def hist(dataframe: pd.DataFrame, x_axis, cluster_label, title="")
+def hist(dataframe: pd.DataFrame, x_axis, title=""):
     p = figure(title=title)
 
-    hist, edges = np.histogram(dataframe[x_axis], density=True, bins=50)
+    hist, edges = np.histogram(dataframe[x_axis], density=True, bins=30)
     p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],
            fill_color="navy", line_color="white", alpha=0.5)
 
@@ -26,6 +27,8 @@ def hist(dataframe: pd.DataFrame, x_axis, cluster_label, title="")
     p.xaxis.axis_label = x_axis
     p.yaxis.axis_label = 'Frequência'
     p.grid.grid_line_color="white"
+
+    return p
 
 def _unique(original):
     return list(set(original))
