@@ -1,5 +1,5 @@
 import click
-from sklearn.preprocessing import Normalizer
+from sklearn.preprocessing import MinMaxScaler
 
 from desafio_iafront.data.saving import save_partitioned
 from desafio_iafront.jobs.common import prepare_dataframe, transform
@@ -17,8 +17,7 @@ def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos):
     result = prepare_dataframe(departamentos_lista, visitas_com_conversao, data_inicial, data_final)
 
     # Faz a escala dos valores
-    print("Transformando valores")
-    result_scaled = transform(result, Normalizer())
+    result_scaled = transform(result, MinMaxScaler())
 
     # salva resultado
     save_partitioned(result_scaled, saida, ['data', 'hora'])
