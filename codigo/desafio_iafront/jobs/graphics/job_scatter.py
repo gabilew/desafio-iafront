@@ -10,20 +10,19 @@ from bokeh.plotting import figure, output_file, show
 from bokeh.layouts import gridplot
 
 @click.command()
-@click.option('--dataframe-path', type=click.Path(exists=True))
-@click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False))
-@click.option('--x_axis')
-@click.option('--y_axis')
-@click.option('--cluster_label')
-@click.option('--transform')
-@click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]))
-@click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]))
-def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_inicial, data_final, transform):
+@click.option('--dataframe-path', type=click.Path(exists=True), help='caminho para o dataframe contendo as colunas de features e labels de cluster')
+@click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False), help='arquivo html para salvar a imagem')
+@click.option('--x_axis', help='coluna do dataframe que será aplicada no eixo x')
+@click.option('--y_axis', help='coluna do dataframe que será aplicada no eixo y')
+@click.option('--cluster_label', help='coluna do dataframe que será aplicada como label')
+@click.option('--transform',help='nome da transformação que aparecerá como título no scatter plot transformado')
+@click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='data mínima das visitas que serão utilizadas no plot')
+@click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='data máxima das visitas que serão utilizadas no plot')
+@click.option('--n-amostras', default=10, type=int, help='percentual de amostras a ser utilizado no plot. Padrão é 10%')
+def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_inicial, data_final, transform, n_amostras):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
     dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function)
-    print(dataframe.shape)
-    dataframe = dataframe.sample(n=int(0.1*dataframe.shape[0]), weights='hora', random_state=1).reset_index(drop=True)
-    print(dataframe.shape)
+    dataframe = dataframe.sample(n=int(n_amostras*dataframe.shape[0]/100), weights='hora', random_state=1).reset_index(drop=True)
     output_file(saida)
 
     p1 = plot(dataframe, x_axis, y_axis, 'convertido', title="Original")
