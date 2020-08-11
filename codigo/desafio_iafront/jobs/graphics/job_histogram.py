@@ -6,7 +6,7 @@ import os
 from desafio_iafront.jobs.graphics.utils import hist
 from desafio_iafront.data.dataframe_utils import read_partitioned_json
 from desafio_iafront.jobs.common import filter_date
-from bokeh.plotting import figure, output_file, show
+from bokeh.plotting import figure, output_file
 from bokeh.layouts import gridplot
 
 @click.command()

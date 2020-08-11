@@ -35,12 +35,14 @@ def _extracting_coordinates(dataframe: pd.DataFrame) -> pd.DataFrame:
 
 
 def transform(dataframe: pd.DataFrame, scaler: TransformerMixin) -> pd.DataFrame:
-    fields_to_normalize = dataframe.filter(['preco', 'prazo', 'frete', 'latitude', 'longitude']).to_numpy()
+    features = ['preco', 'prazo', 'frete', 'latitude', 'longitude']
+    fields_to_normalize = dataframe.filter(features).to_numpy()
 
     feature_scaled = scaler.fit_transform(fields_to_normalize)
 
     dataframe['features'] = list(feature_scaled)
-
+    for i,feature in enumerate(features):
+        dataframe[feature+"_transformed"] = feature_scaled[:,i] 
     return dataframe
 
 
