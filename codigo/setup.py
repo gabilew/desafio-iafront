@@ -22,14 +22,20 @@ setup(
             'prepara-pedidos=desafio_iafront.jobs.pedidos:main',
             'cria-visitas=desafio_iafront.jobs.create_visits:main',
             'normalize=desafio_iafront.jobs.escala_pedidos.job_normalizacao:main',
-            'max-abs-scaler=desafio_iafront.jobs.escala_pedidos.job_max_abs_scaler:main',
-            'min-max-scaler=desafio_iafront.jobs.escala_pedidos.job_min_max_scaler:main',
-            'standard-scaler=desafio_iafront.jobs.escala_pedidos.job_standard_scaler:main',
-            'power-transformer=desafio_iafront.jobs.escala_pedidos.job_power_transformer:main',
-            'robust-scaler=desafio_iafront.jobs.escala_pedidos.job_robust_scaler:main',
+            'maxabs_scaler=desafio_iafront.jobs.escala_pedidos.job_max_abs_scaler:main',
+            'minmax_scaler=desafio_iafront.jobs.escala_pedidos.job_min_max_scaler:main',
+            'standard_scaler=desafio_iafront.jobs.escala_pedidos.job_standard_scaler:main',
+            'power_transformer=desafio_iafront.jobs.escala_pedidos.job_power_transformer:main',
+            'robust_scaler=desafio_iafront.jobs.escala_pedidos.job_robust_scaler:main',
             'scatter=desafio_iafront.jobs.graphics.job_scatter:main',
             'histogram=desafio_iafront.jobs.graphics.job_histogram:main',
-            'graphic-clusters=desafio_iafront.jobs.graphics.job_graphics:main'
+            'graphic-clusters=desafio_iafront.jobs.graphics.job_graphics:main',
+            'kmeans=desafio_iafront.jobs.clusters.job_kmeans:main',
+            'conversao=desafio_iafront.jobs.conversao:main',
+            'scatter-cluster=desafio_iafront.jobs.graphics.job_scatter_cluster:main',
+            'conversao-lineplot=desafio_iafront.jobs.graphics.conversao.job_lineplot:main',
+            'conversao-barplot=desafio_iafront.jobs.graphics.conversao.job_barplot:main'
+
         ]
     }
 )
