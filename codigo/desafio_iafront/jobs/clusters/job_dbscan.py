@@ -4,7 +4,7 @@ import click
 import numpy as np
 
 from desafio_iafront.data.saving import save_partitioned
-from desafio_iafront.jobs.clusters.clusters import kmeans
+from desafio_iafront.jobs.clusters.clusters import DBSCAN
 from desafio_iafront.data.dataframe_utils import read_partitioned_json
 from desafio_iafront.jobs.common import filter_date
 
