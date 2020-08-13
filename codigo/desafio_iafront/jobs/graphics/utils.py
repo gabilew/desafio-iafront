@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from bokeh.plotting import figure
+from bokeh.transform import factor_cmap
 
 
 def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
@@ -11,6 +12,19 @@ def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
     p = figure(title=title)
 
     p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors)
+
+    return p
+
+def plot_clusters(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
+
+    clusters = dataframe[cluster_label].unique()
+    colors = [set_color(_) for _ in clusters]
+    colors=factor_cmap(cluster_label, palette=colors, factors=np.sort(clusters))
+        
+    print(clusters, colors)
+    p = figure(title=title)
+
+    p.scatter(x_axis, y_axis,  source=dataframe,  fill_color=colors, legend=cluster_label)
 
     return p
 
@@ -36,7 +50,6 @@ def _unique(original):
 
 def set_color(color):
     COLORS = ["green", "blue", "red", "orange", "purple"]
-
-    index = color % len(COLORS)
+    index = int(color) % len(COLORS)
 
     return COLORS[index]

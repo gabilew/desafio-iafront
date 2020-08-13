@@ -1,4 +1,5 @@
 import click
+import os
 from bokeh.io import output_file, save
 from functools import partial
 
@@ -23,6 +24,7 @@ def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_in
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
     dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function)
     dataframe = dataframe.sample(n=int(n_amostras*dataframe.shape[0]/100), weights='hora', random_state=1).reset_index(drop=True)
+
     output_file(saida)
 
     p1 = plot(dataframe, x_axis, y_axis, 'convertido', title="Original")
@@ -34,6 +36,7 @@ def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_in
     p2.xaxis.axis_label = x_axis
     p2.yaxis.axis_label = y_axis
     p2.grid.grid_line_color="white"
+    
     figura = gridplot([p1,p2], ncols=2, plot_width=400, plot_height=400, toolbar_location=None)
     save(figura)
 
