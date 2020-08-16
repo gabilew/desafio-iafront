@@ -29,19 +29,20 @@ def main(pedidos, visitas, produtos, saida, data_inicial, data_final):
             print(f"Concluído para {date_partition} {hour}h")
             
 
-def method_name(data: str, hour: int, pedidos: str, produtos_df: pd.DataFrame, saida: str, visitas: str) -> pd.DataFrame:
-    """[summary]
+def method_name(data: str, hour: int, pedidos: str, produtos_df: pd.DataFrame, saida: str, visitas: str) -> str:
+    """Método que cria e combina dataframes com visitas, pedidos e produtos e salva em arquivos json paritionados por 
+    departamento, dia e hora, respectivamente
 
     Args:
-        data (str): [description]
-        hour (int): [description]
-        pedidos (str): [description]
-        produtos_df (pd.DataFrame): [description]
-        saida (str): [description]
-        visitas (str): [description]
+        data (str): dia 
+        hour (int): hora
+        pedidos (str): path do dataframe de pedido
+        produtos_df (pd.DataFrame): dataframe de produtos
+        saida (str): path para salvar o novo dataframe
+        visitas (str): path para o dataframe de visitas
 
     Returns:
-        pd.DataFrame: [description]
+        date_partition str
     """
     hour_snnipet = f"hora={hour}"
     data_str = data.strftime('%Y-%m-%d')
@@ -52,6 +53,7 @@ def method_name(data: str, hour: int, pedidos: str, produtos_df: pd.DataFrame, s
     pedidos_df = create_pedidos_df(date_partition, hour_snnipet, pedidos)
     
     visita_com_produto_e_conversao_df = merge_visita_produto(data_str, hour, pedidos_df, produtos_df, visitas_df)
+    
     save_prepared(saida, visita_com_produto_e_conversao_df)
 
     return date_partition
