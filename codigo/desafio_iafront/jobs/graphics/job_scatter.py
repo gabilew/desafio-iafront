@@ -19,7 +19,7 @@ from bokeh.layouts import gridplot
 @click.option('--transform',help='nome da transformação que aparecerá como título no scatter plot transformado')
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='data mínima das visitas que serão utilizadas no plot')
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='data máxima das visitas que serão utilizadas no plot')
-@click.option('--n-amostras', default=10, type=int, help='percentual de amostras a ser utilizado no plot. Padrão é 10%')
+@click.option('--n-amostras', default=10, help='percentual de amostras a ser utilizado no plot. Padrão é 10%')
 def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_inicial, data_final, transform, n_amostras):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
     dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function)
@@ -36,8 +36,20 @@ def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_in
     p2.xaxis.axis_label = x_axis
     p2.yaxis.axis_label = y_axis
     p2.grid.grid_line_color="white"
+
+    dataframe=dataframe[dataframe.convertido==1]
+    p3 = plot(dataframe, x_axis, y_axis, 'convertido', title="Original")
+    p4 = plot(dataframe, x_axis+"_transformed", y_axis+"_transformed", 'convertido', title=transform)
+    p3.xaxis.axis_label = x_axis
+    p3.yaxis.axis_label = y_axis
+    p3.grid.grid_line_color="white"
+
+    p4.xaxis.axis_label = x_axis
+    p4.yaxis.axis_label = y_axis
+    p4.grid.grid_line_color="white"
+
     
-    figura = gridplot([p1,p2], ncols=2, plot_width=400, plot_height=400, toolbar_location=None)
+    figura = gridplot([p1,p2,p3,p4], ncols=2, plot_width=400, plot_height=400)
     save(figura)
 
 
