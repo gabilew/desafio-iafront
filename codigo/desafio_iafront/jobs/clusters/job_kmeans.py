@@ -7,7 +7,7 @@ from desafio_iafront.data.saving import save_partitioned
 from desafio_iafront.jobs.clusters.clusters import kmeans
 from desafio_iafront.data.dataframe_utils import read_partitioned_json
 from desafio_iafront.jobs.common import filter_date
-
+from desafio_iafront.jobs.contants import DEPARTAMENTOS
 
 @click.command()
 @click.option('--dataset', type=click.Path(exists=True))
@@ -19,6 +19,8 @@ def main(dataset: str, number_of_cluster: int, saida: str, data_inicial, data_fi
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
 
     dataset = read_partitioned_json(file_path=dataset, filter_function=filter_function)
+    drop_cols = list(set(dataset.columns)&set(DEPARTAMENTOS.split(",")))
+    dataset.drop(columns=drop_cols, inplace =True) 
     vector = np.asarray(list(dataset['features'].to_numpy()))
     coordinates, labels = kmeans(vector, number_of_cluster)
 
