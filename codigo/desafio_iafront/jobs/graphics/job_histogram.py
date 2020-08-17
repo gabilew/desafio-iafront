@@ -19,7 +19,6 @@ from bokeh.layouts import gridplot
 def main(dataframe_path: str, saida: str, x_axis, data_inicial,  data_final, transform):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
     dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function)
-    dataframe = dataframe.sample(n=int(0.1*dataframe.shape[0]), weights='hora', random_state=1).reset_index(drop=True)
     convertido = dataframe[dataframe.convertido==1]
     
     x_axis_lista =  x_axis.split(",")
@@ -33,7 +32,7 @@ def main(dataframe_path: str, saida: str, x_axis, data_inicial,  data_final, tra
         p3 = hist(convertido, x,   title="Original-Convertido")
         p4 = hist(convertido, x+"_transformed",  title=transform+"-Convertido")
 
-        figura = gridplot([p1,p2,p3,p4], ncols=2,  plot_width=400, plot_height=400, toolbar_location=None)
+        figura = gridplot([p1,p2,p3,p4], ncols=2,  plot_width=400, plot_height=400)
         save(figura)
 
 
