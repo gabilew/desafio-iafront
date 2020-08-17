@@ -33,6 +33,7 @@ setup(
             'minibatchkmeans=desafio_iafront.jobs.clusters.job_minibatchkmeans:main',
             'dbscan=desafio_iafront.jobs.clusters.job_dbscan:main',
             'wardagg=desafio_iafront.jobs.clusters.job_ward_agg:main',
+            'birch=desafio_iafront.jobs.clusters.job_birch:main',
             'conversao=desafio_iafront.jobs.conversao:main',
             'scatter-cluster=desafio_iafront.jobs.graphics.job_scatter_cluster:main',
             'conversao-lineplot=desafio_iafront.jobs.graphics.conversao.job_lineplot:main',
