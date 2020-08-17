@@ -4,10 +4,10 @@ import click
 import numpy as np
 
 from desafio_iafront.data.saving import save_partitioned
-from desafio_iafront.jobs.clusters.clusters import DBSCAN
+from desafio_iafront.jobs.clusters.clusters import dbscan
 from desafio_iafront.data.dataframe_utils import read_partitioned_json
 from desafio_iafront.jobs.common import filter_date
-
+from desafio_iafront.jobs.contants import DEPARTAMENTOS
 
 @click.command()
 @click.option('--dataset', type=click.Path(exists=True))
@@ -19,10 +19,14 @@ def main(dataset: str, number_of_cluster: int, saida: str, data_inicial, data_fi
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
 
     dataset = read_partitioned_json(file_path=dataset, filter_function=filter_function)
+    drop_cols = list(set(dataset.columns)&set(DEPARTAMENTOS.split(",")))
+    dataset.drop(columns=drop_cols, inplace =True) 
+    dataset = dataset.sample(n=int(0.01*dataset.shape[0]),random_state=1).reset_index(drop=True)
+    print(dataset.shape)
     vector = np.asarray(list(dataset['features'].to_numpy()))
-    coordinates, labels = kmeans(vector, number_of_cluster)
+    coordinates, labels = dbscan(vector, number_of_cluster)
 
-    dataset['cluster_coordinate'] = list(coordinates)
+    dataset['cluster_coordinate'] = None
 
     dataset['cluster_label'] = list(labels)
 
