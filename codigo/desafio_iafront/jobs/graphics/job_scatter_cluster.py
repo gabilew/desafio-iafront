@@ -27,12 +27,11 @@ def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_in
     assert("reverse" not in dataframe_path)
 
     delta: timedelta = (data_final - data_inicial)
-    date_partitions = [data_inicial + timedelta(days=days) for days in range(0,delta.days+7,7)]
+    date_partitions = [data_inicial + timedelta(days=days) for days in range(0,delta.days+1,7)]
 
     count = 0 
-    print(date_partitions)
     for data_i, data_f in zip(date_partitions[:-1], date_partitions[1:]):  
-        print("Carregando:",data_i.date(), '-',data_f.date() )
+      
         filter_function = partial(filter_date, data_inicial=data_i, data_final=data_f)
         _dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function) 
         _dataframe = _dataframe.sample(n=int(n_amostras*_dataframe.shape[0]/100),random_state=1).reset_index(drop=True)

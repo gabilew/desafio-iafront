@@ -20,7 +20,6 @@ setup(
     entry_points={
         'console_scripts': [
             'prepara-pedidos=desafio_iafront.jobs.pedidos:main',
-            'cria-visitas=desafio_iafront.jobs.create_visits:main',
             'normalize=desafio_iafront.jobs.escala_pedidos.job_normalizacao:main',
             'maxabs_scaler=desafio_iafront.jobs.escala_pedidos.job_max_abs_scaler:main',
             'minmax_scaler=desafio_iafront.jobs.escala_pedidos.job_min_max_scaler:main',
@@ -31,6 +30,9 @@ setup(
             'histogram=desafio_iafront.jobs.graphics.job_histogram:main',
             'graphic-clusters=desafio_iafront.jobs.graphics.job_graphics:main',
             'kmeans=desafio_iafront.jobs.clusters.job_kmeans:main',
+            'minibatchkmeans=desafio_iafront.jobs.clusters.job_minibatchkmeans:main',
+            'dbscan=desafio_iafront.jobs.clusters.job_dbscan:main',
+            'wardagg=desafio_iafront.jobs.clusters.job_ward_agg:main',
             'conversao=desafio_iafront.jobs.conversao:main',
             'scatter-cluster=desafio_iafront.jobs.graphics.job_scatter_cluster:main',
             'conversao-lineplot=desafio_iafront.jobs.graphics.conversao.job_lineplot:main',
