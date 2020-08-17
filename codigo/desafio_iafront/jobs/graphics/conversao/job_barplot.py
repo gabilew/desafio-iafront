@@ -18,13 +18,12 @@ from bokeh.layouts import gridplot
 def main(dataframe_path: str, saida: str,  data_inicial,  data_final, transform):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
     dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function)
-    dataframe = dataframe.sample(n=int(0.1*dataframe.shape[0]), weights='hora', random_state=1).reset_index(drop=True)
     
     clusters = dataframe['cluster_label'].unique()
     ncounts = [dataframe[dataframe['cluster_label']==cluster].convertido.mean()*100 for cluster in clusters]
     
     output_file(saida)
-    p = figure(x_range=clusters, plot_height=400, title="Fruit Counts",
+    p = figure(x_range=clusters, plot_height=400, title=transform,
            toolbar_location=None, tools="")
 
     p.vbar(x=clusters, top=ncounts, width=0.9)
