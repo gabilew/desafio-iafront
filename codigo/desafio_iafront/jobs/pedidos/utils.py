@@ -10,10 +10,11 @@ from desafio_iafront.jobs.pedidos.contants import SAVING_PARTITIONS
 
 def _prepare(pedidos_joined: pd.DataFrame) -> pd.DataFrame:
     # Remove colunas resultantes do merge
+    
     result_dataset = drop_merged_columns(pedidos_joined)
-    # Remove colunas que não serão usadas
+    # Remove colunas que não serão usada
     result_dataset = result_dataset[KEPT_COLUNS]
-    # Renomeia colunas
+    # Renomeia coluna
     result_dataset = result_dataset.rename(columns=COLUMN_RENAMES)
 
     return result_dataset
@@ -28,8 +29,9 @@ def drop_merged_columns(data_frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def save_prepared(saida: str, visita_com_produto_e_conversao_df: pd.DataFrame):
+  
     prepared = _prepare(visita_com_produto_e_conversao_df)
-
+    
     save_partitioned(prepared, saida, SAVING_PARTITIONS)
 
 

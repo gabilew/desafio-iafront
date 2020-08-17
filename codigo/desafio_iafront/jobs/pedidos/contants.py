@@ -4,7 +4,7 @@ from desafio_iafront.jobs.contants import COLUNA_DATA, \
 SAVING_PARTITIONS = [COLUNA_DEPARTAMENTO, COLUNA_DATA, COLUNA_HORA]
 ENCODE_COLUMNS = ["departamento"]
 
-KEPT_COLUNS = ['product_id', 'visit_id', "purchase_id", 'datetime', 'product_category_name', 'prazo',
+KEPT_COLUNS = ['product_id', 'visit_id', "purchase_id", 'datetime', 'product_category_name', 'prazo', 'product_photos_qty',
                "preco", "frete", "cep_prefixo", "coordenadas", 'data', 'hora']
 
 COLUMN_RENAMES = {
@@ -15,3 +15,4 @@ COLUMN_RENAMES = {
     'delivery_date': 'data_entrega',
     'purchase_id': 'id_pedido'
 }
+
