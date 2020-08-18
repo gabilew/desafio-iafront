@@ -11,7 +11,7 @@ def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
 
     p = figure(title=title)
 
-    p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors, alpha=0.5)
+    p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors, , legend_field=cluster_label, size=10, alpha=0.5)
 
     return p
 
