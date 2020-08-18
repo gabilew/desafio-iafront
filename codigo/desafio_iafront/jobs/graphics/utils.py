@@ -30,7 +30,11 @@ def plot_clusters(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=
 def hist(dataframe: pd.DataFrame, x_axis, x_range, title=""):
     p = figure(title=title, x_range=x_range)
 
-    hist, edges = np.histogram(dataframe[x_axis], density=True, bins=20)
+    nunique = dataframe[x_axis].nunique()
+    if len(nunique)<20:
+        bins=nunique
+    else: bins=20
+    hist, edges = np.histogram(dataframe[x_axis], density=True, bins=bins)
     p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],
            fill_color="navy", line_color="white", alpha=0.5)
 
