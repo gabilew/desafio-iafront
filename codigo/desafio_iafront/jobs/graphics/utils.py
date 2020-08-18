@@ -18,17 +18,17 @@ def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
 def plot_clusters(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
 
     clusters = dataframe[cluster_label].unique()
-    colors = [set_color(_) for _ in clusters]
+    colors = [set_color(_) for _ in range(len(clusters))]
     colors = factor_cmap(cluster_label, palette=colors, factors=np.sort(clusters))        
     
     p = figure(title=title)
 
-    p.scatter(x_axis, y_axis,  source=dataframe,  fill_color=colors, alpha=0.5, legend=cluster_label)
+    p.scatter(x_axis, y_axis,  source=dataframe,  fill_color=colors, alpha=0.5, legend_field=cluster_label, size=10)
 
     return p
 
-def hist(dataframe: pd.DataFrame, x_axis, title=""):
-    p = figure(title=title)
+def hist(dataframe: pd.DataFrame, x_axis, x_range, title=""):
+    p = figure(title=title, x_range=x_range)
 
     hist, edges = np.histogram(dataframe[x_axis], density=True, bins=20)
     p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],

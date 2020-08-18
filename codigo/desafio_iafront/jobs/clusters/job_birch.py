@@ -7,7 +7,7 @@ from desafio_iafront.data.saving import save_partitioned
 from desafio_iafront.jobs.clusters.clusters import birch
 from desafio_iafront.data.dataframe_utils import read_partitioned_json
 from desafio_iafront.jobs.common import filter_date
-from desafio_iafront.jobs.contants import DEPARTAMENTOS
+from desafio_iafront.jobs.constants import DEPARTAMENTOS
 
 @click.command()
 @click.option('--dataset', type=click.Path(exists=True))

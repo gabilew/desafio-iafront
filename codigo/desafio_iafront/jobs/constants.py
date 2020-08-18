@@ -6,4 +6,4 @@ COLUNA_LATITUDE = "geolocation_lat"
 COLUNA_LONGITUDE = "geolocation_lng"
 PREFIXO_CEP_RAW = "geolocation_zip_code_prefix"
 DEPARTAMENTOS="moveis_sala,eletronicos,perfumaria,dvds_blu_ray,nan,construcao_ferramentas_seguranca,casa_conforto_2,eletrodomesticos_2,artes_e_artesanato,pc_gamer,moveis_decoracao,musica"
-	
+FEATURES=['preco', 'prazo', 'frete', 'product_description_lenght','product_photos_qty', 'coord_distance']	

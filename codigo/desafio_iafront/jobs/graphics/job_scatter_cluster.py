@@ -9,7 +9,7 @@ from desafio_iafront.jobs.graphics.utils import plot, plot_clusters
 from desafio_iafront.data.dataframe_utils import read_partitioned_json
 from desafio_iafront.jobs.common import filter_date
 from desafio_iafront.jobs.clusters.pca import pca
-from desafio_iafront.jobs.contants import DEPARTAMENTOS
+from desafio_iafront.jobs.constants import DEPARTAMENTOS
 from bokeh.plotting import figure, output_file
 from collections import Counter
 
