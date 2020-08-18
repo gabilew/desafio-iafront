@@ -35,6 +35,8 @@ def main(pedidos, visitas, produtos, data_inicial, data_final):
             visitas_df = create_visitas_df(date_partition, hour_snnipet, visitas)    
             pedidos_df = create_pedidos_df(date_partition, hour_snnipet, pedidos)    
             visita_com_produto_e_conversao_df = merge_visita_produto(data_str, hour, pedidos_df, produtos_df, visitas_df)
+
+            #checa missing vals
             nan_values = pd.DataFrame(visita_com_produto_e_conversao_df.isna().mean()*100)
             nan=pd.DataFrame()
             nan['cols'] = nan_values.index
@@ -46,25 +48,25 @@ def main(pedidos, visitas, produtos, data_inicial, data_final):
                 missing_vals = pd.concat((missing_vals,nan ))
             except: missing_vals = nan
             
-            #visita_com_produto_e_conversao_df.rename(columns={"purchase_id":"id_pedido"}, inplace=True)
+            #calcula matriz de correlação com o método de spearman
             visita_com_produto_e_conversao_df["id_pedido"]=visita_com_produto_e_conversao_df.purchase_id
             visita_com_produto_e_conversao_df=convert(visita_com_produto_e_conversao_df)
             df = visita_com_produto_e_conversao_df
          
-            #df['convertido'] = df.purchase_id.apply(lambda x: 1.0 if x!=np.nan else 0)
-            #print(df[['convertido', 'purchase_id']])
+        
             numerical_columns= list(filter(lambda x: "float64"==df[x].dtype or "int64"==df[x].dtype, df.columns))
 
             df = df[numerical_columns]
             try: 
                 corr += df.corr(method='spearman')
             except: corr=df.corr(method='spearman')
-            count+=1
+            
+            #salva summary estatístico do dataframe
             try:
                 summary = update_summary(summary, df.describe())
             except:
                 summary = df.describe()
-            
+            count+=1
 
     corr = corr/count
     corr.to_csv("correlation.csv")
@@ -75,6 +77,16 @@ def main(pedidos, visitas, produtos, data_inicial, data_final):
          
 
 def update_summary(df1, df2):
+    """atualiza o dataframe df1 com as informações do df2
+    As informações atualizadas são média, desvio padrão, máximo, mínimo e contagem.
+
+    Args:
+        df1 (pd.DataFrame): dataframe contendo mean, std, min, max e count
+        df2 (pd.Dataframe): dataframe contendo mean, std, min, max e count
+
+    Returns:
+        [type]: [description]
+    """
     count = df1.count + df2.count
     mean = (df1.mean*df1.count + df2.mean*df2.count)/count
     max_ = max([df1.max, df2.max])
