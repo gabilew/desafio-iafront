@@ -22,7 +22,7 @@ def main(dataframe_path: str, saida: str,  data_inicial, data_final, transform):
     output_file(saida)
     clusters = dataframe.cluster_label.unique()
     colors = [set_color(_) for _ in clusters]
-    p = figure(plot_width=800, plot_height=400, x_axis_type='datetime', title=transform)
+    p = figure(plot_width=1000, plot_height=400, x_axis_type='datetime', title=transform)
     for i,cluster in enumerate(clusters): 
               
         dataframe_cluster = dataframe[dataframe.cluster_label==cluster].groupby('tempo').min()
