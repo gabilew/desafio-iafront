@@ -28,6 +28,7 @@ setup(
             'robust_scaler=desafio_iafront.jobs.escala_pedidos.job_robust_scaler:main',
             'scatter=desafio_iafront.jobs.graphics.job_scatter:main',
             'histogram=desafio_iafront.jobs.graphics.job_histogram:main',
+            'tsne=desafio_iafront.jobs.graphics.dim_reducao:main',
             'graphic-clusters=desafio_iafront.jobs.graphics.job_graphics:main',
             'kmeans=desafio_iafront.jobs.clusters.job_kmeans:main',
             'minibatchkmeans=desafio_iafront.jobs.clusters.job_minibatchkmeans:main',
