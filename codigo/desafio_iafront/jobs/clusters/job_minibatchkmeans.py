@@ -10,29 +10,35 @@ from desafio_iafront.jobs.common import filter_date
 from desafio_iafront.jobs.constants import DEPARTAMENTOS
 
 @click.command()
-@click.option('--dataset', type=click.Path(exists=True))
-@click.option('--number_of_cluster', type=click.INT)
-@click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False))
-@click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]))
-@click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]))
-def main(dataset: str, number_of_cluster: int, saida: str, data_inicial, data_final):
+@click.option('--dataframe', type=click.Path(exists=True), help='caminho para os arquivos escalados')
+@click.option('--number_of_cluster', type=click.INT, help='número de centroides a serem calculados')
+@click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False), help='caminho para salvar os arquivos clusterizados')
+@click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='mmenor data dos arquivos carregados')
+@click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='maior data dos arquivos carregados')
+@click.option('--n-samples', type=float, default=1, help='percentual amostras a serem utilizadas para clsuterização')
+def main(dataframe: str, number_of_cluster: int, saida: str, data_inicial, data_final, drop_departamentos, n_samples):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
 
-    dataset = read_partitioned_json(file_path=dataset, filter_function=filter_function)
-     if len(departamentos) == 0:
-        departamentos_lista = DEPARTAMENTOS
-    else: 
-        departamentos_lista = [departamento.strip() for departamento in departamentos.split(",")]
-    dataset.drop(columns=drop_cols, inplace =True) 
-    vector = np.asarray(list(dataset['features'].to_numpy()))
+    dataframe = read_partitioned_json(file_path=dataframe, filter_function=filter_function)
+     if drop_departamentos:
+        #dropa as colunas de departamento para reduzir o tamanho do dataframe
+        #essa informação não será salva para para análises futuras, por exemplo, checar se mesmas categorias pertencem ao mesmo cluster
+        drop_cols = list(set(dataframe.columns)&set(DEPARTAMENTOS))
+        dataframe.drop(columns=drop_cols, inplace =True) 
+
+    #utiliza apenas uma amostra dos dados
+    if n_samples < 1:
+        dataframe = dataframe.sample(n=int(n_samples*dataframe.shape[0]), weights='datahora', random_state=1).reset_index(drop=True)
+
+    vector = np.asarray(list(dataframe['features'].to_numpy()))
     coordinates, labels = minbatchkmeans(vector, number_of_cluster)
 
-    dataset['cluster_coordinate'] = list(coordinates)
+    dataframe['cluster_coordinate'] = list(coordinates)
 
-    dataset['cluster_label'] = list(labels)
+    dataframe['cluster_label'] = list(labels)
 
-    save_partitioned(dataset, saida, ['data', 'hora','cluster_label'])
-    save_partitioned(dataset, saida+"_reverse", ['cluster_label','data', 'hora',])
+    save_partitioned(dataframe, saida, ['data', 'hora','cluster_label'])
+    save_partitioned(dataframe, saida+"_reverse", ['cluster_label','data', 'hora',])
 
 
 if __name__ == '__main__':
