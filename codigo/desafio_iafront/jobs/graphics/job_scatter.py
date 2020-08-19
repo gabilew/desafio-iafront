@@ -24,7 +24,6 @@ def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_in
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
     dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function)
     dataframe = dataframe.sample(n=int(n_amostras*dataframe.shape[0]/100), weights='hora', random_state=1).reset_index(drop=True)
-
     output_file(saida)
 
     p1 = plot(dataframe, x_axis, y_axis, 'convertido', title="Original")

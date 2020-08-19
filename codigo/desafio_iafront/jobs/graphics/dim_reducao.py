@@ -14,7 +14,7 @@ from sklearn.manifold import TSNE
 
 @click.command()
 @click.option('--dataframe-path', type=click.Path(exists=True), help='caminho para o dataframe')
-@click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False), 'caminho para salvar o arquvio .html')
+@click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False),help= 'caminho para salvar o arquvio .html')
 @click.option('--cluster_label', help='field do dataframe para ser usado como legenda do scatter_plot')
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='menor data dos arquvios carregados')
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='maior data dos arquivos carregados')

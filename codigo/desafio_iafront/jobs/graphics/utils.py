@@ -10,8 +10,7 @@ def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
     colors = [set_color(_) for _ in clusters]
 
     p = figure(title=title)
-
-    p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors,  legend_field=cluster_label, size=10, alpha=0.5)
+    p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors,  size=5, alpha=0.5)
 
     return p
 
@@ -20,10 +19,10 @@ def plot_clusters(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=
     clusters = dataframe[cluster_label].unique()
     colors = [set_color(_) for _ in range(len(clusters))]
     colors = factor_cmap(cluster_label, palette=colors, factors=np.sort(clusters))        
-    
+
     p = figure(title=title)
 
-    p.scatter(x_axis, y_axis,  source=dataframe,  fill_color=colors, alpha=0.5, legend_field=cluster_label, size=10)
+    p.scatter(x_axis, y_axis,  source=dataframe,  fill_color=colors, alpha=0.5, legend=cluster_label, size=5)
 
     return p
 
@@ -31,7 +30,6 @@ def hist(dataframe: pd.DataFrame, x_axis, x_range, title=""):
     p = figure(title=title, x_range=x_range)
 
     nunique = dataframe[x_axis].nunique()
-    print(nunique)
     if nunique<20:
         bins=nunique
     else: bins=20

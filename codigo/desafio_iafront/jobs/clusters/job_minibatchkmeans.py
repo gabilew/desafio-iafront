@@ -15,12 +15,13 @@ from desafio_iafront.jobs.constants import DEPARTAMENTOS
 @click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False), help='caminho para salvar os arquivos clusterizados')
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='mmenor data dos arquivos carregados')
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='maior data dos arquivos carregados')
+@click.option('--drop-departamentos', default=True, help='Se True, as colunas de departamentos são eliminadas')
 @click.option('--n-samples', type=float, default=1, help='percentual amostras a serem utilizadas para clsuterização')
 def main(dataframe: str, number_of_cluster: int, saida: str, data_inicial, data_final, drop_departamentos, n_samples):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
 
     dataframe = read_partitioned_json(file_path=dataframe, filter_function=filter_function)
-     if drop_departamentos:
+    if drop_departamentos:
         #dropa as colunas de departamento para reduzir o tamanho do dataframe
         #essa informação não será salva para para análises futuras, por exemplo, checar se mesmas categorias pertencem ao mesmo cluster
         drop_cols = list(set(dataframe.columns)&set(DEPARTAMENTOS))
