@@ -12,13 +12,12 @@ Vale ressaltar que existem outras informações comumente relacionadas a taxa de
 
 As variáveis escolhidas foram: preco, frete, prazo. Para utilizar as variáveis de latitude e logitude seria necessário um processamento prévio. Uma possibilidade seria enctontrar centróides (provavelmente referentes aos centros de distribuição) e substituir a
 
-[fig](figuras/preco)
-[fig](figuras/prazo)
-[fig](figuras/frete)
-[fig](figuras/preco)
-[fig](figuras/preco-prazo)
-[fig](figuras/prazo_frete)
-[fig](figuras/prazo_frete)
+![histograma do preço](figuras/preco.png)
+![histograma do prazo](figuras/prazo.png)
+![instograma do frete](figuras/frete.png)
+![preco x prazo](figuras/preco-prazo.png)
+![prazo x frete ](figuras/prazo_frete.png)
+![preco x frete](figuras/preco_frete.png)
 
 Como se pode observar nos _scatter plots_ as três variáveis parecem descorrelacionadas. Além disso, quando plotados apenas os dados convertidos (em azul), não se observa nenhum tipo de tendência no sccater plot. 
 ### Escalamento
