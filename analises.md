@@ -10,7 +10,9 @@ Os dados são separados por departamentos. Apesar da categoria dos produtos infl
 
 Vale ressaltar que existem outras informações comumente relacionadas a taxa de conversão no e-commerce como por exemplo a fonte (como o consumidor chegou à página do produto), se a visita é pelo celular ou pelo desktop.
 
-As variáveis escolhidas foram: preco, frete, prazo. Para utilizar as variáveis de latitude e logitude seria necessário um processamento prévio. Uma possibilidade seria enctontrar centróides (provavelmente referentes aos centros de distribuição) e substituir a
+As variáveis escolhidas foram: preco, frete, prazo, quantidade de fotos e comprimento da descrição. Essas variáveis foram escolhidas uma vez que, intuitamente, influenciam na decisão de compra. Uma pessoa dificilmente compraria um produto sem foto. Vale ressaltar ainda que muitas vezes os próprios dados podem fornecer insights a princípio contra-intuitivos. Além das variáveis citadas, também utilizamos a informação de localização do cliente. Por exemplo, uma pessoa que mora longe dos grandes centros terá, provavelmente, fretes mais caros e prazos mais longos naturalmente e, então aceitará fretes e prazos maiores que a pessoa média nos grandes centros. Para utilizar as variáveis de latitude e logitude é necessário um processamento prévio. Neste projeto encontramos 5 centroides via kmeans e utilizamos como variável a distância ao centroide mais próximo (os centroides poderiam ser associados aos centros de distribuição). A escolha de 5 centroides foi arbitraria. 
+
+As figuras a seguir mostram o histograma das variáveis selecionadas e _scatter plots_ de preco, prazo e frete 2 a 2.
 
 ![histograma do preço](figuras/preco.png)
 ![histograma do prazo](figuras/prazo.png)
@@ -19,9 +21,10 @@ As variáveis escolhidas foram: preco, frete, prazo. Para utilizar as variáveis
 ![prazo x frete ](figuras/prazo_frete.png)
 ![preco x frete](figuras/preco_frete.png)
 
-Como se pode observar nos _scatter plots_ as três variáveis parecem descorrelacionadas. Além disso, quando plotados apenas os dados convertidos (em azul), não se observa nenhum tipo de tendência no sccater plot. 
-### Escalamento
-O escalamento é uma etapa importante do pre-processamento visto evita um viés para variáveis de valores devido a diferentes magnitudes em cada dimensão (em geral quando as variáveis apresentam siginificados muito difierentes).  
+Como se pode observar nos _scatter plots_ as três variáveis parecem descorrelacionadas. Além disso, quando plotados apenas os dados convertidos (em azul), não se observa nenhum tipo de tendência no _sccater plot_. 
+
+## Escalamento
+O escalamento é uma etapa importante do pre-processamento visto evita um viés para algumas variáveis  devido a diferentes magnitudes em cada dimensão (em geral quando as variáveis apresentam siginificados muito diferentes).  
 Foram utilizados os 6 escalamentos sugeridos
 
 #### Normalize:
@@ -41,11 +44,11 @@ Essa transformação torna todas as variáveis entre 0 e 1 de forma global, isto
 Diferente dos métodos anteriores, esse método efetua a padronização usando a mediana e quantis e por isso é menos sensível a outliers. É útil quando o dataset contém outliers que podem prejudicar o algoritmo que se deseja utilizar.
 
 ##### Power Transform:
-
+Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após a transformação, o resultado é transformado para ter média zero e variancia unitária. Este método é útil para preparar dados que serão entregues a modelos que assumem normalidade dos dados.
 ### Usando uma semana de dados como entrada e vendo os gráficos, o que você pode dizer sobre cada uma das transformações?
 
 * usando 01/06/2020 - 07/06/2020
-* StandardScaler, MaxAbsScaler e MinMaxScaler, RobustScaler, não modificam o formato das distribuição como pode ser observado nos histogramas, apenas o range das varriáveis é alterado.
+* StandardScaler, MaxAbsScaler e MinMaxScaler, RobustScaler, não modificam o formato das distribuição como pode ser observado nos histogramas, apenas o range das variáveis é alterado.
 * Utilizando o Normalizer, frete x preco é trasformado em uma parábola. A distribuição do frete foi deslocada para direita enquanto a distribuição do prazo foi deslocada para esquerda. A distribuição do preco assumiu um formato bimodal (em 0.5 e 1). Note que a magnitude do prazo é muito menor que a do frete e do preco e, dessa forma, contribuirá menos para a clusterização. 
 * O PowerTransformer tende a Gaussianizar as variáveis, além de torná-la de média zero e variância unitária. Tanto o preco quanto o frete tiveram a densidade deslocada para direita, enquanto o prazo permaneceu com um formato de distribuição uniforme.
 * usando 14/06/2020 - 21/06/2020, nenhuma alteração evidente foi observada. No caso da Power transform, a distribuição do frete ficou mais concentrada à direita que não primeira semana de junho.

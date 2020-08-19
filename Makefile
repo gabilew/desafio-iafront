@@ -3,13 +3,11 @@
 
 #Definindo variáveis globais
 DATA_INICIAL="01/06/2020"
-DATA_FINAL="15/06/2020"
-DATA="01062020-15062020"
+DATA_FINAL="21/06/2020"
+DATA="01062020-21062020"
 DEPARTAMENTOS="moveis_sala,eletronicos,perfumaria,dvds_blu_ray,nan,construcao_ferramentas_seguranca,casa_conforto_2,eletrodomesticos_2,artes_e_artesanato,pc_gamer,moveis_decoracao,musica"
 PLOTS="../dataset-desafio-ia-front/plots"
 SOURCE="../dataset-desafio-ia-front"
-TRANSFORM=robust_scaler
-CLUSTER_METHOD=kmeans
 N_CLUSTERS=4
 PARTICAO=dia
 .DEFAULT: help
@@ -24,32 +22,63 @@ help:
 	@echo "O pipeline da análise:"
 	@echo "		*pedidos"
 	@echo "			combinar dataframe de visitas e pedidos (e produtos). Os parâmetros são DATA_INICIAL e DATA_FINAL no formato dd/mm/yyyy"
-
+	#############################################################################################################################################################
 	@echo "		*scale"
 	@echo "			escalar as variáveis preco, frete, prazo, longitude, latitude. Os parâmetros são DATA_INICIAL e DATA_FINAL no formato dd/mm/yyyy, DEPARTAMENTOS e TRANSFORM"
 	@echo "			as transformações implementadas são normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scaler, power_transformer"
 	@echo "			note que DATA_INICIAL e DATA_FINAL são importantes para escalamentos que consideram todos os dados"
-
+	@echo "			Parâmetros"
+	@echo "			DATA_INICIAL e <DATA_FINAL> no formato dd/mm/yyyy"
+	@echo "			<DEPARTAMENTOS>: lista de departamentos separados por vírgula"
+	@echo "			<TRANSFORM> : nome do escalamento: [normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scalar, power_transform]"
+	#############################################################################################################################################################	
 	@echo "		*scale-plots"
 	@echo "			avaliar o escalamento em scatter_plots 2 a 2 e histogramas. Os parâmetros são DATA_INICIAL e DATA_FINAL no formato dd/mm/yyyy, DEPARTAMENTOS e TRANSFORM"
+	@echo "			Parâmetros"
+	@echo "			<DATA_INICIAL> e <DATA_FINAL> no formato dd/mm/yyyy"
+	@echo "			<TRANSFORM> : nome do escalamento: [normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scalar, power_transform]"
+	#############################################################################################################################################################	
 
 	@echo "		*cluster"
-	@echo "			Métodos de clusterização do sklearn.clusters implementado neste pipeline: kmeans, dbscan ward_agg, ." 
-	@echo "			Os parâmetros são DATA_INICIAL e DATA_FINAL no formato dd/mm/yyyy, DEPARTAMENTOS e TRANSFORM, N_CLUSTERS"
+	@echo "			Métodos de clusterização do sklearn.clusters implementado neste pipeline: [kmeans, dbscan, wardagg, birch, minibatchkmeans ." 
 	@echo "			observar o resultado da clusterização em scatter_plot (5 features reduzidas a 2 por pca)"
+	@echo "			Parâmetros"
+	@echo "			<DATA_INICIAL> e <DATA_FINAL> no formato dd/mm/yyyy"
+	@echo "			<DEPARTAMENTOS> : lista de departamentos separados por vírgula"
+	@echo "			<TRANSFORM> : nome do escalamento: [normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scalar, power_transform]"
+	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, birch, minibatchkmeans]"
+	@echo "			<N_SAMPLES> : percentual de amostras a serem utilizadas (são amostradas aleatoriamente)"
+	@echo "			<N_CLUSTERS> : número de clusters"
+	#############################################################################################################################################################
 
 	@echo "		*conversao"
 	@echo "			Calcula a conversão por cluster por partição de tempo. Os parâmetros são DATA_INICIAL e DATA_FINAL no formato dd/mm/yyyy, CLUSTER_METHOD e TRANSFORM, e PARTICAO"
 	@echo "			PARTICAO pode ser minuto, hora ou dia"
+	@echo "			Parâmetros"
+	@echo "			<DATA_INICIAL> e <DATA_FINAL> no formato dd/mm/yyyy"
+	@echo "			<DEPARTAMENTOS> : lista de departamentos separados por vírgula"
+	@echo "			<TRANSFORM> : nome do escalamento: [normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scalar, power_transform]"
+	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, birch, minibatchkmeans]"
+	@echo "			<N_SAMPLES> : percentual de amostras a serem utilizadas (são amostradas aleatoriamente)"
+	#############################################################################################################################################################
+
 
 	@echo "		*run"
 	@echo "			Roda todo pipeline utilizado para gerar os resultados deste desafio para um método de escalamento definito da variável 'transform' "
 	@echo " 		O pipeline não inclui o job {prepara-pedidos} visto que este é comum a todos os métodos de escalamento" 
-	@echo " 		o comando ``make run`` computa a transformação de escalamento, e gera histogramas e scatter-plots para primeira e segunda semanas do dataset"
-	@echo "			" 
+	@echo " 		o comando <make run> computa a transformação de escalamento, e gera histogramas e scatter-plots para primeira e segunda semanas do dataset"
+	@echo "			Os dados escalados são clusterizados e então realiza-se a análise de conversão" 
+	@echo "			Parâmetros"
+	@echo "			<DATA_INICIAL> e <DATA_FINAL> no formato dd/mm/yyyy"
+	@echo "			<DEPARTAMENTOS> : lista de departamentos separados por vírgula"
+	@echo "			<TRANSFORM> : nome do escalamento: [normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scalar, power_transform]"
+	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, birch, minibatchkmeans]"
+	@echo "			<N_SAMPLES> : percentual de amostras a serem utilizadas (são amostradas aleatoriamente)"
+	@echo "			<PARTICAO> : como calcular a conversão: por minuto, hora ou dia"
+	#############################################################################################################################################################	
 
 install:
-	pip3 install -e .
+	pip3 install -e codigo/.
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm --force {} +
@@ -79,7 +108,7 @@ scale-plots:
 cluster:
 	mkdir -p "${SOURCE}/cluster/${TRANSFORM}_${CLUSTER_METHOD}"
 	${CLUSTER_METHOD} --dataset="${SOURCE}/scale/${TRANSFORM}" --saida="${SOURCE}/cluster/${TRANSFORM}_${CLUSTER_METHOD}"  --data-inicial=${DATA_INICIAL} --data-final=${DATA_FINAL} --number_of_cluster=${N_CLUSTERS} 
-	mkdir -p "${PLOTS}/clusters/${DATA}"
+	mkdir -p "${PLOTS}/clusters/${DATA}" --n-samples=${N_SAMPLES} --drop-departamentos=${DROP}
 	scatter-cluster --saida="${PLOTS}/clusters/${DATA}/${TRANSFORM}_${CLUSTER_METHOD}.html" --dataframe-path="${SOURCE}/cluster/${TRANSFORM}_${CLUSTER_METHOD}"  --data-inicial=${DATA_INICIAL} --data-final=${DATA_FINAL} --cluster_label=cluster_label --n-amostras=5
 	tsne --saida="${PLOTS}/clusters/${DATA}/${TRANSFORM}_${CLUSTER_METHOD}_tsne.html" --dataframe-path="${SOURCE}/cluster/${TRANSFORM}_${CLUSTER_METHOD}"  --data-inicial=${DATA_INICIAL} --data-final=${DATA_FINAL} --cluster_label=cluster_label 
 
