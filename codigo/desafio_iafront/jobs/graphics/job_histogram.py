@@ -2,6 +2,7 @@ import click
 from bokeh.io import output_file, save
 from functools import partial
 import os
+import numpy as np
 
 from desafio_iafront.jobs.graphics.utils import hist
 from desafio_iafront.data.dataframe_utils import read_partitioned_json
@@ -36,8 +37,8 @@ def main(dataframe_path: str, saida: str, x_axis, data_inicial,  data_final, tra
         p3 = hist(convertido, x, x_range,  title="Original-Convertido")
 
         x_range = (np.min(dataframe[x+"_transformed"]), np.min(dataframe[x+"_transformed"]))
-        p2 = hist(dataframe, x+"_transformed",  title=transform)          
-        p4 = hist(convertido, x+"_transformed",  title=transform+"-Convertido")
+        p2 = hist(dataframe, x+"_transformed",x_range,  title=transform)          
+        p4 = hist(convertido, x+"_transformed",x_range,  title=transform+"-Convertido")
 
         figura = gridplot([p1,p2,p3,p4], ncols=2,  plot_width=400, plot_height=400)
         save(figura)

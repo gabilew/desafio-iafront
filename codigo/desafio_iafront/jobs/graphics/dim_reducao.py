@@ -27,8 +27,7 @@ def main(dataframe_path: str, saida: str,  cluster_label, data_inicial, data_fin
 
     print("Dataframe carregado")
     if dataframe.shape[0]>50000:
-        frac = dataframe.shape[0]/50000
-        dataframe = dataframe.sample(n=int(frac*dataframe.shape[0]), random_state=1).reset_index(drop=True)
+        dataframe = dataframe.sample(n=50000, random_state=1).reset_index(drop=True)
     
     output_file(saida)
     X_coords = TSNE(n_components=2, perplexity=80).fit_transform(np.asarray(list(dataframe[FEATURES].to_numpy()))).T

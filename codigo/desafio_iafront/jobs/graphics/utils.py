@@ -11,7 +11,7 @@ def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
 
     p = figure(title=title)
 
-    p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors, , legend_field=cluster_label, size=10, alpha=0.5)
+    p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors,  legend_field=cluster_label, size=10, alpha=0.5)
 
     return p
 
@@ -31,7 +31,8 @@ def hist(dataframe: pd.DataFrame, x_axis, x_range, title=""):
     p = figure(title=title, x_range=x_range)
 
     nunique = dataframe[x_axis].nunique()
-    if len(nunique)<20:
+    print(nunique)
+    if nunique<20:
         bins=nunique
     else: bins=20
     hist, edges = np.histogram(dataframe[x_axis], density=True, bins=bins)
