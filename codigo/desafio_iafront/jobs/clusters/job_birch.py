@@ -19,7 +19,10 @@ def main(dataset: str, number_of_cluster: int, saida: str, data_inicial, data_fi
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
 
     dataset = read_partitioned_json(file_path=dataset, filter_function=filter_function)
-    drop_cols = list(set(dataset.columns)&set(DEPARTAMENTOS.split(",")))
+     if len(departamentos) == 0:
+        departamentos_lista = DEPARTAMENTOS
+    else: 
+        departamentos_lista = [departamento.strip() for departamento in departamentos.split(",")]
     dataset.drop(columns=drop_cols, inplace =True) 
     #dataset = dataset.sample(n=int(0.01*dataset.shape[0]),random_state=1).reset_index(drop=True)
     print(dataset.shape)

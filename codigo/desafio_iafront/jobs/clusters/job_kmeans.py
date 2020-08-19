@@ -19,7 +19,7 @@ def main(dataset: str, number_of_cluster: int, saida: str, data_inicial, data_fi
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
 
     dataset = read_partitioned_json(file_path=dataset, filter_function=filter_function)
-    drop_cols = list(set(dataset.columns)&set(DEPARTAMENTOS.split(",")))
+    drop_cols = list(set(dataset.columns)&set(DEPARTAMENTOS))
     dataset.drop(columns=drop_cols, inplace =True) 
     vector = np.asarray(list(dataset['features'].to_numpy()))
     coordinates, labels = kmeans(vector, number_of_cluster)

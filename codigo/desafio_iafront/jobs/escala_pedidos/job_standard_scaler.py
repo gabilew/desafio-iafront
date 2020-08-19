@@ -6,10 +6,10 @@ from desafio_iafront.jobs.common import prepare_dataframe, transform
 from desafio_iafront.jobs.constants import DEPARTAMENTOS 
 
 @click.command()
-@click.option('--visitas-com-conversao', type=click.Path(exists=True))
-@click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False))
-@click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]))
-@click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]))
+@click.option('--visitas-com-conversao', type=click.Path(exists=True), help='caminho para os arquivos .json de visitas combinadas com pedidos')
+@click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False), help='caminho para salvar os arquivos escalados')
+@click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='mmenor data dos arquivos carregados')
+@click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='maior data dos arquivos carregados')
 @click.option('--departamentos', type=str, default="", help="Departamentos separados por virgula")
 def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos):
 
