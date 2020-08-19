@@ -43,10 +43,13 @@ help:
 	@echo "			PARTICAO pode ser minuto, hora ou dia"
 
 	@echo "		*run"
-	@echo "			Roda todo pipeline utilizado para gerar os resultados deste desafio." 
+	@echo "			Roda todo pipeline utilizado para gerar os resultados deste desafio para um método de escalamento definito da variável 'transform' "
+	@echo " 		O pipeline não inclui o job {prepara-pedidos} visto que este é comum a todos os métodos de escalamento" 
+	@echo " 		o comando ``make run`` computa a transformação de escalamento, e gera histogramas e scatter-plots para primeira e segunda semanas do dataset"
+	@echo "			" 
 
 install:
-	pip install codigo/.
+	pip3 install -e .
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm --force {} +
@@ -92,25 +95,25 @@ conversao:
 
 run:
 
-	#make scale TRANSFORM=${transform} 
-	#mkdir -p "${PLOTS}/${transform}/semana1"
-	#scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
-	#scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
-	#scatter --saida="${PLOTS}/${transform}/semana1/${transform}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${transform}
+	make scale TRANSFORM=${transform} 
+	mkdir -p "${PLOTS}/${transform}/semana1"
+	scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
+	scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
+	scatter --saida="${PLOTS}/${transform}/semana1/${transform}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${transform}
 	
-	#histogram --saida="${PLOTS}/${transform}/semana1/${transform}_hist.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=${transform}
+	histogram --saida="${PLOTS}/${transform}/semana1/${transform}_hist.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=${transform}
 
-	#mkdir -p "${PLOTS}/${transform}/semana2"
-	#scatter --saida="${PLOTS}/${transform}/semana2/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
-	#scatter --saida="${PLOTS}/${transform}/semana2/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
-	#scatter --saida="${PLOTS}/${transform}/semana2/${transform}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${transform}
+	mkdir -p "${PLOTS}/${transform}/semana2"
+	scatter --saida="${PLOTS}/${transform}/semana2/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
+	scatter --saida="${PLOTS}/${transform}/semana2/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
+	scatter --saida="${PLOTS}/${transform}/semana2/${transform}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${transform}
 	
-	#histogram --saida="${PLOTS}/${transform}/semana2/${transform}_hist.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --transform=${transform}
+	histogram --saida="${PLOTS}/${transform}/semana2/${transform}_hist.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --transform=${transform}
 
 
 	
-	#make cluster CLUSTER_METHOD=minibatchkmeans TRANSFORM=${transform} 
-	#make conversao CLUSTER_METHOD=minibatchkmeans TRANSFORM=${transform} 
+	make cluster CLUSTER_METHOD=minibatchkmeans TRANSFORM=${transform} 
+	make conversao CLUSTER_METHOD=minibatchkmeans TRANSFORM=${transform} 
 	
 	make cluster CLUSTER_METHOD=dbscan TRANSFORM=${transform} 
 
@@ -120,153 +123,3 @@ run:
 	
 	make cluster CLUSTER_METHOD=birch TRANSFORM=${transform} 
 	make conversao  CLUSTER_METHOD=birch TRANSFORM=${transform} 
-test:
-
-	
-	semana1_inicio='01/06/2020'
-	semana1_final='08/06/2020'
-	semana2_inicio='08/06/2020'
-	semana2_final='15/06/2020'
-
-	#make pedidos
-	#######################################################################################
-	
-	make scale TRANSFORM=normalize
-	mkdir -p "${PLOTS}/normalize/semana1" 
-	scatter --saida="${PLOTS}/normalize/semana1/normalize_preco-frete.html" --dataframe-path="${SOURCE}/scale/normalize"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=normalize
-	scatter --saida="${PLOTS}/normalize/semana1/normalize_preco-prazo.html" --dataframe-path="${SOURCE}/scale/normalize"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=normalize
-	scatter --saida="${PLOTS}/normalize/semana1/normalize_frete-prazo.html" --dataframe-path="${SOURCE}/scale/normalize"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=normalize
-	
-	histogram --saida="${PLOTS}/normalize/semana1/normalize_hist.html" --dataframe-path="${SOURCE}/scale/normalize"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=normalize
-
-	mkdir -p "${PLOTS}/normalize/semana2"
-	scatter --saida="${PLOTS}/normalize/semana2/normalize_preco-frete.html" --dataframe-path="${SOURCE}/scale/normalize"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=normalize
-	scatter --saida="${PLOTS}/normalize/semana2/normalize_preco-prazo.html" --dataframe-path="${SOURCE}/scale/normalize"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=normalize
-	scatter --saida="${PLOTS}/normalize/semana2/normalize_frete-prazo.html" --dataframe-path="${SOURCE}/scale/normalize"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=normalize
-	
-	histogram --saida="${PLOTS}/normalize/semana2/normalize_hist.html" --dataframe-path="${SOURCE}/scale/normalize"  --data-inicial='08/06/2020' --data-final='15/06/2020' --transform=normalize
-
-	#######################################################################################
-	
-	make scale TRANSFORM=standard_scaler
-	mkdir -p "${PLOTS}/standard_scaler/semana1"
-	scatter --saida="${PLOTS}/standard_scaler/semana1/standard_scaler_preco-frete.html" --dataframe-path="${SOURCE}/scale/standard_scaler"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=standard_scaler
-	scatter --saida="${PLOTS}/standard_scaler/semana1/standard_scaler_preco-prazo.html" --dataframe-path="${SOURCE}/scale/standard_scaler"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=standard_scaler
-	scatter --saida="${PLOTS}/standard_scaler/semana1/standard_scaler_frete-prazo.html" --dataframe-path="${SOURCE}/scale/standard_scaler"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=standard_scaler
-	
-	histogram --saida="${PLOTS}/standard_scaler/semana1/standard_scaler_hist.html" --dataframe-path="${SOURCE}/scale/standard_scaler"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=standard_scaler
-
-	mkdir -p "${PLOTS}/standard_scaler/semana2"
-	scatter --saida="${PLOTS}/standard_scaler/semana2/standard_scaler_preco-frete.html" --dataframe-path="${SOURCE}/scale/standard_scaler"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=standard_scaler
-	scatter --saida="${PLOTS}/standard_scaler/semana2/standard_scaler_preco-prazo.html" --dataframe-path="${SOURCE}/scale/standard_scaler"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=standard_scaler
-	scatter --saida="${PLOTS}/standard_scaler/semana2/standard_scaler_frete-prazo.html" --dataframe-path="${SOURCE}/scale/standard_scaler"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=standard_scaler
-	
-	histogram --saida="${PLOTS}/standard_scaler/semana2/standard_scaler_hist.html" --dataframe-path="${SOURCE}/scale/standard_scaler"  --data-inicial='08/06/2020' --data-final='15/06/2020' --transform=standard_scaler
-
-	#######################################################################################
-	
-	make scale TRANSFORM=minmax_scaler
-	mkdir -p "${PLOTS}/minmax_scaler/semana1"
-	scatter --saida="${PLOTS}/minmax_scaler/semana1/minmax_scaler_preco-frete.html" --dataframe-path="${SOURCE}/scale/minmax_scaler"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=minmax_scaler
-	scatter --saida="${PLOTS}/minmax_scaler/semana1/minmax_scaler_preco-prazo.html" --dataframe-path="${SOURCE}/scale/minmax_scaler"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=minmax_scaler
-	scatter --saida="${PLOTS}/minmax_scaler/semana1/minmax_scaler_frete-prazo.html" --dataframe-path="${SOURCE}/scale/minmax_scaler"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=minmax_scaler
-	
-	histogram --saida="${PLOTS}/minmax_scaler/semana1/minmax_scaler_hist.html" --dataframe-path="${SOURCE}/scale/minmax_scaler"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=minmax_scaler
-
-	mkdir -p "${PLOTS}/minmax_scaler/semana2"
-	scatter --saida="${PLOTS}/minmax_scaler/semana2/minmax_scaler_preco-frete.html" --dataframe-path="${SOURCE}/scale/minmax_scaler"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=minmax_scaler
-	scatter --saida="${PLOTS}/minmax_scaler/semana2/minmax_scaler_preco-prazo.html" --dataframe-path="${SOURCE}/scale/minmax_scaler"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=minmax_scaler
-	scatter --saida="${PLOTS}/minmax_scaler/semana2/minmax_scaler_frete-prazo.html" --dataframe-path="${SOURCE}/scale/minmax_scaler"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=minmax_scaler
-	
-	histogram --saida="${PLOTS}/minmax_scaler/semana2/minmax_scaler_hist.html" --dataframe-path="${SOURCE}/scale/minmax_scaler"  --data-inicial='08/06/2020' --data-final='15/06/2020' --transform=minmax_scaler
-
-	#######################################################################################
-
-	TRANSFORM=robust_scaler
-	make scale 
-	mkdir -p "${PLOTS}/${TRANSFORM}/semana1"
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	
-	histogram --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_hist.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=${TRANSFORM}
-
-	mkdir -p "${PLOTS}/${TRANSFORM}/semana2"
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	
-	histogram --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_hist.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --transform=${TRANSFORM}
-
-
-	
-	make cluster CLUSTER_METHOD=minibatchkmeans
-	make conversao
-	CLUSTER_METHOD=dbscan
-	make cluster
-	CLUSTER_METHOD=wardagg
-	make cluster
-	make conversao
-	CLUSTER_METHOD=birch
-	make cluster
-	make conversao
-	#######################################################################################
-	TRANSFORM=power_transformer
-	make scale 
-	mkdir -p "${PLOTS}/${TRANSFORM}/semana1"
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	
-	histogram --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_hist.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=${TRANSFORM}
-
-	mkdir -p "${PLOTS}/${TRANSFORM}/semana2"
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	
-	histogram --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_hist.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --transform=${TRANSFORM}
-
-
-	CLUSTER_METHOD=minibatchkmeans
-	make cluster
-	make conversao
-	CLUSTER_METHOD=dbscan
-	make cluster
-	CLUSTER_METHOD=wardagg
-	make cluster
-	make conversao
-	CLUSTER_METHOD=birch
-	make cluster
-	make conversao
-	#######################################################################################
-	TRANSFORM=maxabs_scaler
-	make scale 
-	mkdir -p "${PLOTS}/${TRANSFORM}/semana1"
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	
-	histogram --saida="${PLOTS}/${TRANSFORM}/semana1/${TRANSFORM}_hist.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=${TRANSFORM}
-
-	mkdir -p "${PLOTS}/${TRANSFORM}/semana2"
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	scatter --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${TRANSFORM}
-	
-	histogram --saida="${PLOTS}/${TRANSFORM}/semana2/${TRANSFORM}_hist.html" --dataframe-path="${SOURCE}/scale/${TRANSFORM}"  --data-inicial='08/06/2020' --data-final='15/06/2020' --transform=${TRANSFORM}
-
-
-	CLUSTER_METHOD=minibatchkmeans
-	make cluster
-	make conversao
-	CLUSTER_METHOD=dbscan
-	make cluster
-	CLUSTER_METHOD=wardagg
-	make cluster
-	make conversao
-	CLUSTER_METHOD=birch
-	make cluster
-	make conversao
-	#######################################################################################
-	
