@@ -10,7 +10,7 @@ from desafio_iafront.jobs.constants import DEPARTAMENTOS
 @click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False))
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]))
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]))
-@click.option('--departamentos', type=str, defalut="", help="Departamentos separados por virgula")
+@click.option('--departamentos', type=str, default="", help="Departamentos separados por virgula")
 def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos):
 
     if len(departamentos) == 0:
