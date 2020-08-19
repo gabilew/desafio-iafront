@@ -19,8 +19,7 @@ from collections import Counter
 @click.option('--cluster_label', help='field do dataframe a ser utilizado como legenda')
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='mmenor data dos arquivos carregados')
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='maior data dos arquivos carregados')
-@click.option('--n-amostras', default=0.1, help='percentual de amostras a ser utilizado no plot. Padrão é 10%')
-def main(dataframe_path: str, saida: str, cluster_label, data_inicial, data_final, n_amostras):
+def main(dataframe_path: str, saida: str, cluster_label, data_inicial, data_final):
 
     """
     Scatter plot das features com dimensão reduzida por pca e legenda de clusters
@@ -35,7 +34,7 @@ def main(dataframe_path: str, saida: str, cluster_label, data_inicial, data_fina
       
         filter_function = partial(filter_date, data_inicial=data_i, data_final=data_f)
         _dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function) 
-        _dataframe = _dataframe.sample(n=int(n_amostras*_dataframe.shape[0]/100),random_state=1).reset_index(drop=True)
+        
        
         if count == 0:
             #remove dummy columns para reduzir o consumo de memória
@@ -47,7 +46,10 @@ def main(dataframe_path: str, saida: str, cluster_label, data_inicial, data_fina
             _dataframe.drop(columns=drop_cols, inplace =True) 
             dataframe = pd.concat((dataframe,_dataframe))
         
-    dataframe = pca(dataframe)
+    
+    if dataframe.shape[0]>50000:
+        _dataframe = _dataframe.sample(n=50000,random_state=1).reset_index(drop=True)
+    
 
     output_file(saida)
 

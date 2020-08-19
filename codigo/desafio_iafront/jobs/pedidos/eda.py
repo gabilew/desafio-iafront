@@ -8,6 +8,8 @@ from datetime import timedelta
 from desafio_iafront.data.dataframe_utils import read_csv
 from utils import *
 from desafio_iafront.jobs.constants import DEPARTAMENTOS
+from bokeh.plotting import figure, output_file
+from bokeh.io import output_file, save
 
 @click.command()
 @click.option('--pedidos', type=click.Path(exists=True))
@@ -24,6 +26,9 @@ def main(pedidos, visitas, produtos, data_inicial, data_final):
 
     count=0
 
+    conversao_dia={d:[] for d in range(7)}
+    conversao_hora={h:[] for h in range(24)}
+    count_dia=0
     for data in date_partitions:
         hour_partitions = list(range(0, 24))
     
@@ -51,8 +56,7 @@ def main(pedidos, visitas, produtos, data_inicial, data_final):
             #calcula matriz de correlação com o método de spearman
             visita_com_produto_e_conversao_df["id_pedido"]=visita_com_produto_e_conversao_df.purchase_id
             visita_com_produto_e_conversao_df=convert(visita_com_produto_e_conversao_df)
-            df = visita_com_produto_e_conversao_df
-         
+            df = visita_com_produto_e_conversao_df         
         
             numerical_columns= list(filter(lambda x: "float64"==df[x].dtype or "int64"==df[x].dtype, df.columns))
 
@@ -66,7 +70,36 @@ def main(pedidos, visitas, produtos, data_inicial, data_final):
                 summary = update_summary(summary, df.describe())
             except:
                 summary = df.describe()
+
+            conversao_dia[count%7].append(df.convertido).sum()
+            conversao_hora[count%24].append(df.convertido).sum()
             count+=1
+        count_dia+=1
+
+    #plota histogram de conversão por dia da semana
+    #junta a informação de todas as semanas
+    output_file("conversao_dia.html")
+
+    p = figure( plot_height=400, title="Conversão por dia da semana",
+           )
+    p.vbar(x=list(range(7)), top=[np.mean(conversao_dia[dia]) for dia in conversao_dia], width=0.9)
+    p.xgrid.grid_line_color = None
+    p.yaxis.axis_label = "Taxa de Conversão %"
+    p.xaxis.axis_label = "Dias da semana"
+    save(p)
+
+    #plota histogram de conversão por hora do dia
+    #junta a informação de todos os dias
+    output_file("conversao_hora.html")
+
+    p = figure( plot_height=400, title="Conversão por hora do dia",
+           )
+    p.vbar(x=list(range(7)), top=[np.mean(conversao_hora[hora]) for dia in conversao_hora], width=0.9)
+    p.xgrid.grid_line_color = None
+    p.yaxis.axis_label = "Taxa de Conversão %"
+    p.xaxis.axis_label = "Dias da semana"
+    save(p)
+
 
     corr = corr/count
     corr.to_csv("correlation.csv")

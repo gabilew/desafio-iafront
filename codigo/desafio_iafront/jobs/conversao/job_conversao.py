@@ -32,6 +32,7 @@ def main(dataset: str,  saida: str, particao, data_inicial, data_final):
         dataframe['tempo'] = dataframe.datahora.values.astype('<M8[D]')
     
 
+
     dataframe['taxa_conversao'] =  dataframe.groupby(['tempo','cluster_label'])['convertido'].transform('mean')
   
     save_partitioned(dataframe, saida, ['cluster_label','tempo' ])

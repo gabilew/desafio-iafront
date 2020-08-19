@@ -24,7 +24,7 @@ def main(dataframe_path: str, saida: str,  data_inicial,  data_final, transform)
     
     output_file(saida)
     p = figure(x_range=clusters, plot_height=400, title=transform,
-           toolbar_location=None, tools="")
+            tools="")
 
     p.vbar(x=clusters, top=ncounts, width=0.9)
 

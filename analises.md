@@ -54,7 +54,7 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
 * usando 14/06/2020 - 21/06/2020, nenhuma alteração evidente foi observada. No caso da Power transform, a distribuição do frete ficou mais concentrada à direita que não primeira semana de junho.
 * As variáveis utilizadas parecem uniformemente distribuídas e, não sofreram alterações no formato da distribuição, apenas no suporte. O Normalizer e o Power Transform alteraram principalmente o formato do frete e do prazo.  
  
-Para próxima etapa, seguiremos com o MaxAbsScaler, robustScaler e powerTransformer. O standardRcaler foi descartado porque os dados não são gaussianos e o normalizer foi descartado pelo motivo já mencionado.
+Para próxima etapa, seguiremos com o MaxAbsScaler, RobustScaler e PowerTransformer. O standardRcaler foi descartado porque os dados não são gaussianos e o normalizer foi descartado pelo motivo já mencionado.
 
 ### Clusterização
 
@@ -70,7 +70,24 @@ Como o critério principal foi a escalabilidade, os algoritmos escolhidos foram:
 ###Resultados
 ##TODO 
 
+## Pipeline
 
+O Arquivo Makefile contém os jobs implementados seguindo o pipeline proposto:
 
+* Para executar o script em _../pedidos/job.py_:  
+ ``$ make pedidos --SOURCE=<source path> --DATA_INICIAL=<data incial> --DATA_FINAL=<data final>`` 
 
+* Para escalar os dados com método "transform":
+``$ make scale SOURCE=<source path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
 
+*Para plotar os resultados escalados:
+``$ make scale-plots SOURCE=<source path> PLOTS=<plots path> --DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
+
+*para clusterizar os dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method"
+``$ make cluster SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> CLUSTER_METHOD=<cluster_method> N_SAMPLES=<porcentagem de amostras usadas> DROP<se deve dropar as colunas de departamentos>`` 
+
+*para gerar gráficos e calcular a conversão dos dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method" utilizando a partição temporal "particao"
+``$ make conversao SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> CLUSTER_METHOD=<cluster_method> N_SAMPLES=<porcentagem de amostras usadas para plot> PARTICAO=<particao>``
+
+* Para rodar o pipeline todo para uma transformação específica:
+``$ make run SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> transform=<transform>  N_SAMPLES=<porcentagem de amostras usadas> DROP<se deve dropar as colunas de departamentos>`` 

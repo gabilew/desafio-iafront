@@ -16,7 +16,7 @@ from desafio_iafront.jobs.constants import DEPARTAMENTOS
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='mmenor data dos arquivos carregados')
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='maior data dos arquivos carregados')
 @click.option('--drop-departamentos', default=True, help='Se True, as colunas de departamentos são eliminadas')
-@click.option('--n-samples', type=float, default=1, help='percentual amostras a serem utilizadas para clsuterização')
+@click.option('--n-samples', default=1, help='percentual amostras a serem utilizadas para clsuterização')
 def main(dataframe: str, number_of_cluster: int, saida: str, data_inicial, data_final, drop_departamentos, n_samples):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
 
@@ -29,7 +29,7 @@ def main(dataframe: str, number_of_cluster: int, saida: str, data_inicial, data_
 
     #utiliza apenas uma amostra dos dados
     if n_samples < 1:
-        dataframe = dataframe.sample(n=int(n_samples*dataframe.shape[0]), weights='datahora', random_state=1).reset_index(drop=True)
+        dataframe = dataframe.sample(n=int(n_samples*dataframe.shape[0]), random_state=1).reset_index(drop=True)
 
 
     #aplica o kmeans

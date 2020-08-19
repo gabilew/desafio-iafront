@@ -29,7 +29,7 @@ def main(dataframe: str, number_of_cluster: int, saida: str, data_inicial, data_
 
     #utiliza apenas uma amostra dos dados
     if n_samples < 1:
-        dataframe = dataframe.sample(n=int(n_samples*dataframe.shape[0]), weights='datahora', random_state=1).reset_index(drop=True)
+        dataframe = dataframe.sample(n=int(n_samples*dataframe.shape[0]),  random_state=1).reset_index(drop=True)
 
     vector = np.asarray(list(dataframe['features'].to_numpy()))
     coordinates, labels = agg_clustering(vector, number_of_cluster)

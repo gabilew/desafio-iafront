@@ -4,6 +4,7 @@ from sklearn.preprocessing import RobustScaler
 from desafio_iafront.data.saving import save_partitioned
 from desafio_iafront.jobs.common import prepare_dataframe, transform
 from desafio_iafront.jobs.constants import DEPARTAMENTOS 
+from desafio_iafront.jobs.clusters.pca import pca
 
 @click.command()
 @click.option('--visitas-com-conversao', type=click.Path(exists=True))
@@ -18,10 +19,10 @@ def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos):
         departamentos_lista = [departamento.strip() for departamento in departamentos.split(",")]
 
     result = prepare_dataframe(departamentos_lista, visitas_com_conversao, data_inicial, data_final)
-
+    
     # Faz a escala dos valores
     result_scaled = transform(result, RobustScaler())
-
+    result_scaled = pca(result_scaled)
     # salva resultado
     save_partitioned(result_scaled, saida, ['data', 'hora'])
 

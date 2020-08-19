@@ -17,11 +17,11 @@ from bokeh.plotting import figure, output_file
 @click.option('--cluster_label')
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]))
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]))
-@click.option('--n-amostras', default=10, type=int, help='percentual de amostras a ser utilizado no plot. Padrão é 10%')
-def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_inicial, data_final, n_amostras):
+def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_inicial, data_final):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
     dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function)
-    dataframe = dataframe.sample(n=int(n_amostras*dataframe.shape[0]/100), weights='hora', random_state=1).reset_index(drop=True)
+    if dataframe.shape[0]> 50000:
+        dataframe = dataframe.sample(n=500000, weights='hora', random_state=1).reset_index(drop=True)
     dataframe = pca(dataframe)
 
     output_file(saida)

@@ -31,14 +31,26 @@ def main(dataframe_path: str, saida: str, x_axis, data_inicial,  data_final, tra
         filename = os.path.join(saida[0],x+'-'+saida[1])
         output_file(filename)
         print("Criando histograma em "+ filename)
+        #original
+        x_range = (np.min(dataframe[x]), np.max(dataframe[x])) 
+        nunique = dataframe[x].nunique()
+   
+        if nunique<20:
+            bins=nunique
+        else: bins=20
 
-        x_range = (np.min(dataframe[x]), np.min(dataframe[x])) 
-        p1 = hist(dataframe, x, x_range, title="Original")
-        p3 = hist(convertido, x, x_range,  title="Original-Convertido")
+        p1 = hist(dataframe, x, x_range, bins=bins, title="Original")
+        p3 = hist(convertido, x, x_range, bins=bins, title="Original-Convertido")
 
-        x_range = (np.min(dataframe[x+"_transformed"]), np.min(dataframe[x+"_transformed"]))
-        p2 = hist(dataframe, x+"_transformed",x_range,  title=transform)          
-        p4 = hist(convertido, x+"_transformed",x_range,  title=transform+"-Convertido")
+        #transformado
+        x_range = (np.min(dataframe[x+"_transformed"]), np.max(dataframe[x+"_transformed"]))
+        nunique = dataframe[x+"_transformed"].nunique()
+
+        if nunique<20:
+            bins=nunique
+        else: bins=20
+        p2 = hist(dataframe, x+"_transformed",x_range,  bins=bins, title=transform)          
+        p4 = hist(convertido, x+"_transformed",x_range, bins=bins, title=transform+"-Convertido")
 
         figura = gridplot([p1,p2,p3,p4], ncols=2,  plot_width=400, plot_height=400)
         save(figura)
