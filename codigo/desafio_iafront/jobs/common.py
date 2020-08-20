@@ -19,6 +19,7 @@ def prepare_dataframe(departamentos_lista: Sequence[str], dataset_path, data_ini
     visitas_com_conversao = convert(visitas_com_coordenadas)
     departamentos = pd.get_dummies(visitas_com_conversao["departamento"])
     result = visitas_com_conversao.join(departamentos).drop('departamento', axis=1)
+
     return result
 
 

@@ -14,7 +14,7 @@ from desafio_iafront.jobs.pedidos.utils import *
 @click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False))
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]))
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]))
-@click.option('--max-size', type=int, default=1000, help="número máximo de amostras por particão de hora")
+@click.option('--max-size', type=int, default=500, help="número máximo de amostras por particão de hora")
 def main(pedidos, visitas, produtos, saida, data_inicial, data_final,max_size):
     produtos_df = read_csv(produtos)
     produtos_df["product_id"] = produtos_df["product_id"].astype(str)

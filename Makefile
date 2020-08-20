@@ -3,7 +3,7 @@
 
 #Definindo variáveis globais
 DATA_INICIAL="01/06/2020"
-DATA_FINAL="01/08/2020"
+DATA_FINAL="02/06/2020"
 DATA="01062020-01082020"
 #DEPARTAMENTOS="moveis_sala,eletronicos,perfumaria,dvds_blu_ray,nan,construcao_ferramentas_seguranca,casa_conforto_2,eletrodomesticos_2,artes_e_artesanato,pc_gamer,moveis_decoracao,musica"
 PLOTS="../dataset-desafio-ia-front/plots"
@@ -84,7 +84,7 @@ help:
 	#############################################################################################################################################################	
 
 install:
-	pip3 install -e codigo/.
+	pip3 install -e .
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm --force {} +

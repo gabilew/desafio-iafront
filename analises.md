@@ -8,7 +8,7 @@ Para cada visita há as seguintes informações: frete, prazo, preco, latitude e
 
 Os dados são separados por departamentos. Apesar da categoria dos produtos influenciar a taxa de conversão, deixaremos esse agrupamento a cargo da clusterização que será realizada posteriormente.
 
-Os dados vão de 01/06/2020 a 31/07/2020, totalizando 22.613.872 vistas. Como são muitas visitas, a cada hora são amostradas 1000 visitas. Do dataset total, a média de conversão é de 16%. O [sumário](summary.csv) apresenta a média, desvio padrão, valor mínimo e valor máximo (em alguns casos essas estatísticas não fazem sentido). Além disso, não há nenhuma variável diretamente correlacionada com a taxa de conversão. As figuras a seguir mostram a conversão por dia da semana e por hora do dia (agrupa as mesmas horas e os mesmos dias). Nestes  dados, não há nenhuma tendência explicita em veração à taxa de conversão por dia ou por hora.
+Os dados vão de 01/06/2020 a 31/07/2020, totalizando 22.613.872 vistas. Como são muitas visitas, a cada hora são amostradas 500 visitas (A amostragem foi aleatória sem nenhuma estratificação em relação a departamento ou à conversão. Como a taxa de conversão será avaliada, a distribuição de conversão foi mantida). Do dataset total, a média de conversão é de 16%. O [sumário](reports/summary.csv) apresenta a média, desvio padrão, valor mínimo e valor máximo (em alguns casos essas estatísticas não fazem sentido). Além disso, não há nenhuma variável diretamente correlacionada com a taxa de conversão. As figuras a seguir mostram a conversão por dia da semana e por hora do dia (agrupa as mesmas horas e os mesmos dias). Nestes  dados, não há nenhuma tendência explicita em veração à taxa de conversão por dia ou por hora.
 
 ![Covnersão por dias da semana](figuras/dia.png)
 ![Covnersão por hora do dia, o label do eixo x é "hora do dia"](figuras/dia.png)
@@ -22,7 +22,10 @@ As figuras a seguir mostram o histograma das variáveis selecionadas e _scatter 
 
 ![histograma do preço](figuras/preco.png)
 ![histograma do prazo](figuras/prazo.png)
-![instograma do frete](figuras/frete.png)
+![histograma do frete](figuras/frete.png)
+![histograma da quantidade de fotos do produto](figuras/qty_photos.png)
+![histograma do comprimento da descrição do produto](figuras/description.png)
+![histograma da distância ao centroide mais próximo](figuras/coords.png)
 ![preco x prazo](figuras/preco-prazo.png)
 ![prazo x frete ](figuras/prazo_frete.png)
 ![preco x frete](figuras/preco_frete.png)
@@ -54,6 +57,30 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
 ### Usando uma semana de dados como entrada e vendo os gráficos, o que você pode dizer sobre cada uma das transformações?
 
 * usando 01/06/2020 - 07/06/2020
+* preco x prazo: 
+[Normalizer](plots/normalize/semana1/normalize_preco-prazo), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-prazo), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-prazo), [RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-prazo) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-prazo).
+
+* preco x frete: 
+[Normalizer](plots/normalize/semana1/normalize_preco-frete), MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-frete), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-frete), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-frete),
+[RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-frete) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-frete).
+
+* frete x prazo:
+[Normalizer](plots/normalize/semana1/normalize_frete-prazo), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_frete-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_frete-prazo), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_frete-prazo), [RobustScaler](plots/robust_scaler/semana1/robust_scaler_frete-prazo) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_frete-prazo).
+
+* frete: 
+[Normalizer](plots/normalize/semana1/frete-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/frete-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/frete-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/frete-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/frete-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/frete-power_transformer_hist).
+
+* preco:
+[Normalizer](plots/normalize/semana1/preco-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/preco-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/preco-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/preco-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/precorobust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/preco-power_transformer_hist).
+
+* prazo :
+[Normalizer](plots/normalize/semana1/prazo-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/prazo-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/prazo-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/prazo-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/prazo-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/prazo-power_transformer_hist).
+
+* distância ao centroide mais próximo:
+[Normalizer](plots/normalize/semana1/coords-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/coords-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/coords-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/coords-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/coords-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/coords-power_transformer_hist).
+
+
+
 * StandardScaler, MaxAbsScaler e MinMaxScaler, RobustScaler, não modificam o formato das distribuição como pode ser observado nos histogramas, apenas o range das variáveis é alterado.
 * Utilizando o Normalizer, frete x preco é trasformado em uma parábola. A distribuição do frete foi deslocada para direita enquanto a distribuição do prazo foi deslocada para esquerda. A distribuição do preco assumiu um formato bimodal (em 0.5 e 1). Note que a magnitude do prazo é muito menor que a do frete e do preco e, dessa forma, contribuirá menos para a clusterização. 
 * O PowerTransformer tende a Gaussianizar as variáveis, além de torná-la de média zero e variância unitária. Tanto o preco quanto o frete tiveram a densidade deslocada para direita, enquanto o prazo permaneceu com um formato de distribuição uniforme.
@@ -74,7 +101,9 @@ Como o critério principal foi a escalabilidade, os algoritmos escolhidos foram:
 * AgglomerativeClustering (com linkage=ward): reduz a variância dos clusters de forma hierárquica. Embora seja considerado escalável, também depende de computar uma matriz e, por isso o consumode memória é O(N^2). Dessa forma, apenas 1% dos dados foram utilizados. 
 
 ###Resultados
-##TODO 
+
+
+
 
 ## Pipeline
 
