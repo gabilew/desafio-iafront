@@ -23,7 +23,7 @@ def main(pedidos, visitas, produtos, saida, data_inicial, data_final,max_size):
     date_partitions = [data_inicial.date() + timedelta(days=days) for days in range(delta.days)]
 
     for data in date_partitions:
-        hour_partitions = list(range(0, 23))
+        hour_partitions = list(range(0, 24))
 
         for hour in hour_partitions:
             date_partition = method_name(data, hour, pedidos, produtos_df, saida, visitas, max_size)            

@@ -29,16 +29,23 @@ def drop_merged_columns(data_frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def save_prepared(saida: str, visita_com_produto_e_conversao_df: pd.DataFrame, max_size=None):
-  
+    """
+    prepara o dataframe de visitas combinado com pedidos e produtos e salva
+    Args:
+        saida (str): caminho do diretório para salvar os novos dados
+        visita_com_produto_e_conversao_df (pd.DataFrame): dataframe com todas as informações de visitas e pedidos combinada
+        max_size (int, optional): número  máximo de linhas no dataframe por partição de hora. Se None, não há amostragem. Padrão é None.
+    """
     prepared = _prepare(visita_com_produto_e_conversao_df)
     if max_size is not None:
         if prepared.shape[0]> max_size:
-            prepared.sample(n=max_size, random_state=1).reset_index(drop=True)
+            prepared = prepared.sample(n=max_size, random_state=1).reset_index(drop=True)
     save_partitioned(prepared, saida, SAVING_PARTITIONS)
 
 
 def merge_visita_produto(data_str: str, hour: int, pedidos_df: pd.DataFrame, produtos_df: pd.DataFrame, visitas_df: pd.DataFrame) -> pd.DataFrame:
-    """[summary]
+    """
+    Combina os dataframes de visitas, pedidos e produtos
 
     Args:
         data_str (str): data da visita no format ["%d/%m/%Y"]
@@ -48,7 +55,7 @@ def merge_visita_produto(data_str: str, hour: int, pedidos_df: pd.DataFrame, pro
         visitas_df (pd.DataFrame): dataframe referente às visitas
 
     Returns:
-        pd.DataFrame: [description]
+        pd.DataFrame: dataframe com todas as informações combinadas
     """
     visita_com_produto_df = visitas_df.merge(produtos_df, how="inner", on="product_id", suffixes=("", "_off"))
     visita_com_produto_e_conversao_df = visita_com_produto_df.merge(pedidos_df, how="left", on="visit_id", suffixes=("", "_off"))
@@ -60,15 +67,16 @@ def merge_visita_produto(data_str: str, hour: int, pedidos_df: pd.DataFrame, pro
 
 
 def create_pedidos_df(date_partition: str, hour_snnipet: str, pedidos: str) -> pd.DataFrame:
-    """[summary]
+    """
+    Cria dataframe de pedidos
 
     Args:
-        date_partition (str): [description]
-        hour_snnipet (str): [description]
-        pedidos (pd.DataFrame): [description]
+        date_partition (str): data do dataframe a ser carregado
+        hour_snnipet (str): hora do dataframe a ser carregado
+        pedidos (str): caminho para diretório de pedidos 
 
     Returns:
-        pd.DataFrame: [description]
+        pd.DataFrame: dataframe de pedidos
     """
     pedidos_partition = os.path.join(pedidos, date_partition, hour_snnipet)
     pedidos_df = read_partitioned_json(pedidos_partition)
@@ -77,15 +85,16 @@ def create_pedidos_df(date_partition: str, hour_snnipet: str, pedidos: str) -> p
     return pedidos_df
 
 def create_visitas_df(date_partition: str, hour_snnipet: str, visitas: str) -> pd.DataFrame:
-    """[summary]
+   """
+    Cria dataframe de visitas
 
     Args:
-        date_partition (str): [description]
-        hour_snnipet (str): [description]
-        visitas (str): [description]
+        date_partition (str): data do dataframe a ser carregado
+        hour_snnipet (str): hora do dataframe a ser carregado
+        pedidos (str): caminho para diretório de visitas 
 
     Returns:
-        pd.DataFrame: [description]
+        pd.DataFrame: dataframe de visitas
     """
     
     visitas_partition = os.path.join(visitas, date_partition, hour_snnipet)
