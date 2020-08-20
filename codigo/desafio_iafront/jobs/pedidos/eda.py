@@ -66,23 +66,25 @@ def main(pedidos, visitas, produtos, data_inicial, data_final):
             except: corr=df.corr(method='spearman')
             
             #salva summary estatístico do dataframe
-            try:
+           
+            if count == 0:
+                summary = df.describe()                
+            else:
                 summary = update_summary(summary, df.describe())
-            except:
-                summary = df.describe()
-
-            conversao_dia[count%7].append(df.convertido).sum()
-            conversao_hora[count%24].append(df.convertido).sum()
+            conversao_dia[count%7].append([df.convertido.sum(),df.shape[0]])
+            conversao_hora[count%24].append([df.convertido.sum(),df.shape[0]])
             count+=1
         count_dia+=1
-
+        
     #plota histogram de conversão por dia da semana
     #junta a informação de todas as semanas
     output_file("conversao_dia.html")
 
     p = figure( plot_height=400, title="Conversão por dia da semana",
            )
-    p.vbar(x=list(range(7)), top=[np.mean(conversao_dia[dia]) for dia in conversao_dia], width=0.9)
+    for dia in conversao_dia:
+        conversao_dia[dia] = np.array(conversao_dia[dia]).T
+    p.vbar(x=list(range(7)), top=[np.sum(conversao_dia[dia][0])/np.sum(conversao_dia[dia][1]) for dia in conversao_dia], width=0.9)
     p.xgrid.grid_line_color = None
     p.yaxis.axis_label = "Taxa de Conversão %"
     p.xaxis.axis_label = "Dias da semana"
@@ -92,13 +94,15 @@ def main(pedidos, visitas, produtos, data_inicial, data_final):
     #junta a informação de todos os dias
     output_file("conversao_hora.html")
 
-    p = figure( plot_height=400, title="Conversão por hora do dia",
+    p2 = figure( plot_height=400, title="Conversão por hora do dia",
            )
-    p.vbar(x=list(range(7)), top=[np.mean(conversao_hora[hora]) for dia in conversao_hora], width=0.9)
-    p.xgrid.grid_line_color = None
-    p.yaxis.axis_label = "Taxa de Conversão %"
-    p.xaxis.axis_label = "Dias da semana"
-    save(p)
+    for hora in conversao_hora:
+        conversao_hora[hora] = np.array(conversao_hora[hora]).T
+    p2.vbar(x=list(range(24)), top=[np.sum(conversao_hora[hora][0])/np.sum(conversao_hora[hora][1])for hora in conversao_hora], width=0.9)
+    p2.xgrid.grid_line_color = None
+    p2.yaxis.axis_label = "Taxa de Conversão %"
+    p2.xaxis.axis_label = "horas do dia"
+    save(p2)
 
 
     corr = corr/count
@@ -118,15 +122,19 @@ def update_summary(df1, df2):
         df2 (pd.Dataframe): dataframe contendo mean, std, min, max e count
 
     Returns:
-        [type]: [description]
+        pd.DataFrame: dataframe contendo mean, std, min, max e count acumulado
     """
-    count = df1.count + df2.count
-    mean = (df1.mean*df1.count + df2.mean*df2.count)/count
-    max_ = max([df1.max, df2.max])
-    min_ = min([df1.min, df2.min])
-    std = np.std((df1.std**2*df1.count + df2.std**2*df2.count)/count)
+
+    df = pd.DataFrame()
+    df['count'] = df1.loc['count'] + df2.loc['count']
     
-    return pd.DataFrame({'count':[count], 'mean':[mean], 'max':[max_], 'min':[min_], 'std':[std]})
+    df['mean'] = (df1.loc['mean']*df1.loc['count'] + df2.loc['mean']*df2.loc['count'])/df['count']
+    df['max'] = np.max([df1.loc['max'], df2.loc['max']],axis=0)
+    df['min'] = np.min([df1.loc['min'], df2.loc['min']],axis=0)
+
+    df['std'] = np.sqrt((df1.loc['std']**2*df1.loc['count'] + df2.loc['std']**2*df2.loc['count'])/df['count'])
+  
+    return df.transpose()
 
 if __name__ == '__main__':
     main()

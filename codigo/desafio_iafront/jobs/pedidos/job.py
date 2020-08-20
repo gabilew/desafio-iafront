@@ -14,7 +14,8 @@ from desafio_iafront.jobs.pedidos.utils import *
 @click.option('--saida', type=click.Path(exists=False, dir_okay=True, file_okay=False))
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]))
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]))
-def main(pedidos, visitas, produtos, saida, data_inicial, data_final):
+@click.option('--max-size', type=int, default=1000, help="número máximo de amostras por particão de hora")
+def main(pedidos, visitas, produtos, saida, data_inicial, data_final,max_size):
     produtos_df = read_csv(produtos)
     produtos_df["product_id"] = produtos_df["product_id"].astype(str)
 
@@ -25,11 +26,11 @@ def main(pedidos, visitas, produtos, saida, data_inicial, data_final):
         hour_partitions = list(range(0, 23))
 
         for hour in hour_partitions:
-            date_partition = method_name(data, hour, pedidos, produtos_df, saida, visitas)            
+            date_partition = method_name(data, hour, pedidos, produtos_df, saida, visitas, max_size)            
             print(f"Concluído para {date_partition} {hour}h")
             
 
-def method_name(data: str, hour: int, pedidos: str, produtos_df: pd.DataFrame, saida: str, visitas: str) -> str:
+def method_name(data: str, hour: int, pedidos: str, produtos_df: pd.DataFrame, saida: str, visitas: str, max_size=None) -> str:
     """Método que cria e combina dataframes com visitas, pedidos e produtos e salva em arquivos json paritionados por 
     departamento, dia e hora, respectivamente
 
@@ -54,7 +55,7 @@ def method_name(data: str, hour: int, pedidos: str, produtos_df: pd.DataFrame, s
     
     visita_com_produto_e_conversao_df = merge_visita_produto(data_str, hour, pedidos_df, produtos_df, visitas_df)
     
-    save_prepared(saida, visita_com_produto_e_conversao_df)
+    save_prepared(saida, visita_com_produto_e_conversao_df, max_size)
 
     return date_partition
             

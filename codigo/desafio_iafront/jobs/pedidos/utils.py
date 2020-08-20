@@ -28,10 +28,12 @@ def drop_merged_columns(data_frame: pd.DataFrame) -> pd.DataFrame:
     return result_dataset
 
 
-def save_prepared(saida: str, visita_com_produto_e_conversao_df: pd.DataFrame):
+def save_prepared(saida: str, visita_com_produto_e_conversao_df: pd.DataFrame, max_size=None):
   
     prepared = _prepare(visita_com_produto_e_conversao_df)
-    
+    if max_size is not None:
+        if prepared.shape[0]> max_size:
+            prepared.sample(n=max_size, random_state=1).reset_index(drop=True)
     save_partitioned(prepared, saida, SAVING_PARTITIONS)
 
 

@@ -4,13 +4,19 @@
 analisar a conversão de visitas em pedidos de acordo com grupos semânticos gerados por clusterização.
 
 ### Dados:
-Para cada visita há as seguintes informações: frete, prazo, preco, latitude e longitude. Além disso, também temos o id do produto com o qual, usando outra tabela, obtemos informações como numero de fotos, tamanho da descrição, tamanho do nome do produto. Essas informações foram descartadas das análises. Apenas a presença de fotos seria considerada inicialmente, porém como 
+Para cada visita há as seguintes informações: frete, prazo, preco, latitude e longitude. Além disso, também temos o id do produto com o qual, usando outra tabela, obtemos informações como numero de fotos e  tamanho da descrição.
 
 Os dados são separados por departamentos. Apesar da categoria dos produtos influenciar a taxa de conversão, deixaremos esse agrupamento a cargo da clusterização que será realizada posteriormente.
 
+Os dados vão de 01/06/2020 a 31/07/2020, totalizando 22.613.872 vistas. Como são muitas visitas, a cada hora são amostradas 1000 visitas. Do dataset total, a média de conversão é de 16%. O [sumário](summary.csv) apresenta a média, desvio padrão, valor mínimo e valor máximo (em alguns casos essas estatísticas não fazem sentido). Além disso, não há nenhuma variável diretamente correlacionada com a taxa de conversão. As figuras a seguir mostram a conversão por dia da semana e por hora do dia (agrupa as mesmas horas e os mesmos dias). Nestes  dados, não há nenhuma tendência explicita em veração à taxa de conversão por dia ou por hora.
+
+![Covnersão por dias da semana](figuras/dia.png)
+![Covnersão por hora do dia, o label do eixo x é "hora do dia"](figuras/dia.png)
+
+
 Vale ressaltar que existem outras informações comumente relacionadas a taxa de conversão no e-commerce como por exemplo a fonte (como o consumidor chegou à página do produto), se a visita é pelo celular ou pelo desktop.
 
-As variáveis escolhidas foram: preco, frete, prazo, quantidade de fotos e comprimento da descrição. Essas variáveis foram escolhidas uma vez que, intuitamente, influenciam na decisão de compra. Uma pessoa dificilmente compraria um produto sem foto. Vale ressaltar ainda que muitas vezes os próprios dados podem fornecer insights a princípio contra-intuitivos. Além das variáveis citadas, também utilizamos a informação de localização do cliente. Por exemplo, uma pessoa que mora longe dos grandes centros terá, provavelmente, fretes mais caros e prazos mais longos naturalmente e, então aceitará fretes e prazos maiores que a pessoa média nos grandes centros. Para utilizar as variáveis de latitude e logitude é necessário um processamento prévio. Neste projeto encontramos 5 centroides via kmeans e utilizamos como variável a distância ao centroide mais próximo (os centroides poderiam ser associados aos centros de distribuição). A escolha de 5 centroides foi arbitraria. 
+As variáveis escolhidas foram: preco, frete, prazo, quantidade de fotos e comprimento da descrição. Essas variáveis foram escolhidas uma vez que, intuitamente, influenciam na decisão de compra. Uma pessoa dificilmente compraria um produto sem foto (no entanto o número mínimo de fotos por produto é 1). Vale ressaltar ainda que muitas vezes os próprios dados podem fornecer insights a princípio contra-intuitivos. Além das variáveis citadas, também utilizamos a informação de localização do cliente. Por exemplo, uma pessoa que mora longe dos grandes centros terá, provavelmente, fretes mais caros e prazos mais longos naturalmente e, então aceitará fretes e prazos maiores que a pessoa média nos grandes centros. Para utilizar as variáveis de latitude e logitude é necessário um processamento prévio. Neste projeto encontramos 5 centroides via kmeans e utilizamos como variável a distância ao centroide mais próximo (os centroides poderiam ser associados aos centros de distribuição). A escolha de 5 centroides foi arbitraria. 
 
 As figuras a seguir mostram o histograma das variáveis selecionadas e _scatter plots_ de preco, prazo e frete 2 a 2.
 
