@@ -11,7 +11,7 @@ from desafio_iafront.jobs.common import filter_date
 from desafio_iafront.jobs.clusters.pca import pca
 from desafio_iafront.jobs.constants import DEPARTAMENTOS
 from bokeh.plotting import figure, output_file
-from collections import Counter
+
 
 @click.command()
 @click.option('--dataframe-path', type=click.Path(exists=True), help='caminho para o dataframe')
@@ -48,7 +48,7 @@ def main(dataframe_path: str, saida: str, cluster_label, data_inicial, data_fina
         
     
     if dataframe.shape[0]>50000:
-        _dataframe = _dataframe.sample(n=50000,random_state=1).reset_index(drop=True)
+        dataframe = dataframe.sample(n=50000,random_state=1).reset_index(drop=True)
     
 
     output_file(saida)
