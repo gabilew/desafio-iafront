@@ -9,7 +9,7 @@ from desafio_iafront.jobs.graphics.utils import plot, plot_clusters
 from desafio_iafront.data.dataframe_utils import read_partitioned_json
 from desafio_iafront.jobs.common import filter_date
 from desafio_iafront.jobs.clusters.pca import pca
-from desafio_iafront.jobs.constants import DEPARTAMENTOS
+from desafio_iafront.jobs.constants import DEPARTAMENTOS, NMAX_POINTS
 from bokeh.plotting import figure, output_file
 
 
@@ -47,8 +47,8 @@ def main(dataframe_path: str, saida: str, cluster_label, data_inicial, data_fina
             dataframe = pd.concat((dataframe,_dataframe))
         
     
-    if dataframe.shape[0]>50000:
-        dataframe = dataframe.sample(n=50000,random_state=1).reset_index(drop=True)
+    if dataframe.shape[0]>NMAX_POINTS:
+        dataframe = dataframe.sample(n=NMAX_POINTS,random_state=1).reset_index(drop=True)
     
 
     output_file(saida)

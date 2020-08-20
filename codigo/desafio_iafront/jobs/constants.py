@@ -81,3 +81,4 @@ DEPARTAMENTOS=   ["moveis_sala",
       "artes",
       "construcao_ferramentas_jardim"]
 FEATURES=['preco', 'prazo', 'frete', 'product_description_lenght','product_photos_qty', 'coord_distance']	
+NMAX_POINTS=50000
