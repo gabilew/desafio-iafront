@@ -31,6 +31,7 @@ As figuras a seguir mostram o histograma das variáveis selecionadas e _scatter 
 ![preco x frete](figuras/preco_frete.png)
 
 Como se pode observar nos _scatter plots_ as três variáveis parecem descorrelacionadas. Além disso, quando plotados apenas os dados convertidos (em azul), não se observa nenhum tipo de tendência no _sccater plot_. 
+O histograma gerado pelo _numpy_ mostra a densidade e não a função de propabilidade e por isso pode atingir valores maiores que 1 (depende da largura do bin). A distância ao centroide mais próximo apresenta outliers (veja que as barras estão bem concentradas à esquerda) que provalvelmente correspondem à visitas de clientes localizados mais ao oeste na América do Sul. 
 
 ## Escalamento
 O escalamento é uma etapa importante do pre-processamento visto evita um viés para algumas variáveis  devido a diferentes magnitudes em cada dimensão (em geral quando as variáveis apresentam siginificados muito diferentes).  
@@ -61,7 +62,7 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
 [Normalizer](plots/normalize/semana1/normalize_preco-prazo), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-prazo), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-prazo), [RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-prazo) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-prazo).
 
 * preco x frete: 
-[Normalizer](plots/normalize/semana1/normalize_preco-frete), MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-frete), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-frete), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-frete),
+[Normalizer](plots/normalize/semana1/normalize_preco-frete), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-frete), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-frete), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-frete),
 [RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-frete) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-frete).
 
 * frete x prazo:
@@ -84,7 +85,29 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
 * StandardScaler, MaxAbsScaler e MinMaxScaler, RobustScaler, não modificam o formato das distribuição como pode ser observado nos histogramas, apenas o range das variáveis é alterado.
 * Utilizando o Normalizer, frete x preco é trasformado em uma parábola. A distribuição do frete foi deslocada para direita enquanto a distribuição do prazo foi deslocada para esquerda. A distribuição do preco assumiu um formato bimodal (em 0.5 e 1). Note que a magnitude do prazo é muito menor que a do frete e do preco e, dessa forma, contribuirá menos para a clusterização. 
 * O PowerTransformer tende a Gaussianizar as variáveis, além de torná-la de média zero e variância unitária. Tanto o preco quanto o frete tiveram a densidade deslocada para direita, enquanto o prazo permaneceu com um formato de distribuição uniforme.
-* usando 14/06/2020 - 21/06/2020, nenhuma alteração evidente foi observada. No caso da Power transform, a distribuição do frete ficou mais concentrada à direita que não primeira semana de junho.
+* usando 08/06/2020 - 15/07/2020, nenhuma alteração evidente foi observada. No caso da Power transform, a distribuição do frete ficou mais concentrada à direita que não primeira semana de junho.
+
+-> * preco x prazo: 
+[Normalizer](plots/normalize/semana2/normalize_preco-prazo), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_preco-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_preco-prazo), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_preco-prazo), [RobustScaler](plots/robust_scaler/semana2/robust_scaler_preco-prazo) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_preco-prazo).
+
+-> * preco x frete: 
+[Normalizer](plots/normalize/semana2/normalize_preco-frete), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_preco-frete), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_preco-frete), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_preco-frete),
+[RobustScaler](plots/robust_scaler/semana2/robust_scaler_preco-frete) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_preco-frete).
+
+-> * frete x prazo:
+[Normalizer](plots/normalize/semana2/normalize_frete-prazo), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_frete-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_frete-prazo), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_frete-prazo), [RobustScaler](plots/robust_scaler/semana2/robust_scaler_frete-prazo) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_frete-prazo).
+
+-> * frete: 
+[Normalizer](plots/normalize/semana2/frete-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/frete-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/frete-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/frete-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/frete-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/frete-power_transformer_hist).
+
+-> * preco:
+[Normalizer](plots/normalize/semana2/preco-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/preco-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/preco-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/preco-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/precorobust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/preco-power_transformer_hist).
+
+-> * prazo :
+[Normalizer](plots/normalize/semana2/prazo-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/prazo-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/prazo-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/prazo-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/prazo-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/prazo-power_transformer_hist).
+
+-> * distância ao centroide mais próximo:
+[Normalizer](plots/normalize/semana2/coords-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/coords-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/coords-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/coords-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/coords-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/coords-power_transformer_hist).
 * As variáveis utilizadas parecem uniformemente distribuídas e, não sofreram alterações no formato da distribuição, apenas no suporte. O Normalizer e o Power Transform alteraram principalmente o formato do frete e do prazo.  
  
 Para próxima etapa, seguiremos com o MaxAbsScaler, RobustScaler e PowerTransformer. O standardRcaler foi descartado porque os dados não são gaussianos e o normalizer foi descartado pelo motivo já mencionado.
@@ -100,9 +123,11 @@ Como o critério principal foi a escalabilidade, os algoritmos escolhidos foram:
 * DBSCAN: compara a densidade entre vizinhos. Embora seja considerado escalável, sua implementação no sckit-learn armazena uma matriz o que torna inviável. Assim, apenas 1% dos dados foram utilziados nessa clusterização. Uma alternativa é OPTICS #TODO
 * AgglomerativeClustering (com linkage=ward): reduz a variância dos clusters de forma hierárquica. Embora seja considerado escalável, também depende de computar uma matriz e, por isso o consumode memória é O(N^2). Dessa forma, apenas 1% dos dados foram utilizados. 
 
-###Resultados
+####Resultados
 
+Os resultados da clusterização são apresentados em _scatter plots_ cuja dimensão foi reduzida do espaço de features (6 -> 2) pelo método de PCA tradicional e pelo t-distributed stochastic embedding (tSNE). O PCA mapeia as variáveis no novo espaço de forma linear, já o tSNE realiza um mapeamento não linear mniimizando a distância de Kullback-leiber entre as distribuições de probabilidade similaridade entre dois pontos no espaço original e esses mesmos pontos no espaço projetado. Algumas considerações importantes são: o parâmetro _perplexity_ está relacionado ao número de vizinhos a serem considerados. Quanto maior, mais agrupandos tendem a ficar os pontos (foi escolhido 60);  o número máximo de iterações também tem relação com a qualidade do resultado, quando poucas iterações são realizadas, os pontos ficam mais dispersos (foi deixado o valor default); A distância entre cluster no espaço projetado não possui siginificado (inclusive podem variar para cada _random state_). 
 
+É importante ressaltar que a clusterização foi realizada no espaço original e os métodos de pca (linear) e tSNE (não linear) foram utilizados apenas para visualização.
 
 
 ## Pipeline
@@ -110,6 +135,7 @@ Como o critério principal foi a escalabilidade, os algoritmos escolhidos foram:
 O Arquivo Makefile contém os jobs implementados seguindo o pipeline proposto:
 
 * Para executar o script em _../pedidos/job.py_:  
+
  ``$ make pedidos --SOURCE=<source path> --DATA_INICIAL=<data incial> --DATA_FINAL=<data final>`` 
 
 * Para escalar os dados com método "transform":
@@ -119,10 +145,13 @@ O Arquivo Makefile contém os jobs implementados seguindo o pipeline proposto:
 ``$ make scale-plots SOURCE=<source path> PLOTS=<plots path> --DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
 
 *para clusterizar os dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method"
+
 ``$ make cluster SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> CLUSTER_METHOD=<cluster_method> N_SAMPLES=<porcentagem de amostras usadas> DROP<se deve dropar as colunas de departamentos>`` 
 
 *para gerar gráficos e calcular a conversão dos dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method" utilizando a partição temporal "particao"
+
 ``$ make conversao SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> CLUSTER_METHOD=<cluster_method> N_SAMPLES=<porcentagem de amostras usadas para plot> PARTICAO=<particao>``
 
 * Para rodar o pipeline todo para uma transformação específica:
+
 ``$ make run SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> transform=<transform>  N_SAMPLES=<porcentagem de amostras usadas> DROP<se deve dropar as colunas de departamentos>`` 

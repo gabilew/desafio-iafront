@@ -3,11 +3,11 @@
 
 #Definindo variáveis globais
 DATA_INICIAL="01/06/2020"
-DATA_FINAL="02/06/2020"
+DATA_FINAL="01/08/2020"
 DATA="01062020-01082020"
 #DEPARTAMENTOS="moveis_sala,eletronicos,perfumaria,dvds_blu_ray,nan,construcao_ferramentas_seguranca,casa_conforto_2,eletrodomesticos_2,artes_e_artesanato,pc_gamer,moveis_decoracao,musica"
-PLOTS="../dataset-desafio-ia-front/plots"
-SOURCE="../dataset-desafio-ia-front"
+PLOTS=../dataset-desafio-ia-front/plots
+SOURCE=../dataset-desafio-ia-front
 N_CLUSTERS=4
 PARTICAO=dia
 .DEFAULT: help
@@ -93,7 +93,7 @@ clean-pyc:
 
 pedidos:
 	mkdir -p "${SOURCE}/conversao"
-	prepara-pedidos --visitas="${SOURCE}/visitas" --pedidos="${SOURCE}/pedidos" --produtos="${SOURCE}/produtos.csv" --data-inicial=${DATA_INICIAL} --data-final=${DATA_FINAL} --saida="${SOURCE}/conversao" --max-size=MAX_PEDIDOS
+	prepara-pedidos --visitas="${SOURCE}/visitas" --pedidos="${SOURCE}/pedidos" --produtos="${SOURCE}/produtos.csv" --data-inicial=${DATA_INICIAL} --data-final=${DATA_FINAL} --saida="${SOURCE}/conversao" --max-size=${MAX_SIZE}
 
 scale:
 	@echo "scaling data with ${TRANFORM} using data from ${DATA_INICIAL} to ${DATA_FINAL}"
@@ -150,11 +150,11 @@ run:
 	make cluster CLUSTER_METHOD=minibatchkmeans TRANSFORM=${transform} N_SAMPLES=1.0 DROP=True
 	make conversao CLUSTER_METHOD=minibatchkmeans TRANSFORM=${transform} N_SAMPLES=1.0 DROP=True
 	
-	make cluster CLUSTER_METHOD=dbscan TRANSFORM=${transform} N_SAMPLES=0.01 DROP=True
+	make cluster CLUSTER_METHOD=dbscan TRANSFORM=${transform} N_SAMPLES=0.5 DROP=True
 
 
-	make cluster CLUSTER_METHOD=wardagg TRANSFORM=${transform} N_SAMPLES=0.01 DROP=True
-	make conversao CLUSTER_METHOD=wardagg TRANSFORM=${transform} N_SAMPLES=0.01 DROP=True
+	make cluster CLUSTER_METHOD=wardagg TRANSFORM=${transform} N_SAMPLES=0.5 DROP=True
+	make conversao CLUSTER_METHOD=wardagg TRANSFORM=${transform} N_SAMPLES=0.5 DROP=True
 	
 	make cluster CLUSTER_METHOD=birch TRANSFORM=${transform}  N_SAMPLES=1.0 DROP=True
 	make conversao  CLUSTER_METHOD=birch TRANSFORM=${transform}  N_SAMPLES=1.0 DROP=True
