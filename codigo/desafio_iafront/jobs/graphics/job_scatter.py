@@ -3,10 +3,10 @@ import os
 from bokeh.io import output_file, save
 from functools import partial
 
-from desafio_iafront.jobs.constants import  NMAX_POINTS
-from desafio_iafront.jobs.graphics.utils import plot
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
+from codigo.desafio_iafront.jobs.constants import  NMAX_POINTS
+from codigo.desafio_iafront.jobs.graphics.utils import plot
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
 from bokeh.plotting import figure, output_file, show
 from bokeh.layouts import gridplot
 
@@ -22,6 +22,8 @@ from bokeh.layouts import gridplot
 def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_inicial, data_final, transform):
     filter_function = partial(filter_date, data_inicial=data_inicial, data_final=data_final)
     dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function)
+
+    #limita o número de pontos no plot
     if dataframe.shape[0]>NMAX_POINTS:
         dataframe = dataframe.sample(n=NMAX_POINTS,random_state=1).reset_index(drop=True)
     output_file(saida)

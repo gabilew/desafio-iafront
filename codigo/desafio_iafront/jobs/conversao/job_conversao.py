@@ -3,10 +3,10 @@ from functools import partial
 import click
 import numpy as np
 import pandas as pd
-from desafio_iafront.data.saving import save_partitioned
-from desafio_iafront.jobs.clusters.clusters import kmeans
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
+from codigo.desafio_iafront.data.saving import save_partitioned
+from codigo.desafio_iafront.jobs.clusters.clusters import kmeans
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
 
 
 @click.command()

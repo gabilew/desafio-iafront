@@ -4,8 +4,8 @@ from datetime import datetime
 from typing import Sequence
 from sklearn.base import TransformerMixin
 
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.constants import FEATURES
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.constants import FEATURES
 from sklearn.cluster import MiniBatchKMeans
 
 def prepare_dataframe(departamentos_lista: Sequence[str], dataset_path, data_inicial: datetime,
@@ -17,10 +17,10 @@ def prepare_dataframe(departamentos_lista: Sequence[str], dataset_path, data_ini
     visitas_com_coordenadas = _extracting_coordinates(visitas)
     visitas_com_coordenadas  = _coord_distance(visitas_com_coordenadas)
     visitas_com_conversao = convert(visitas_com_coordenadas)
-    departamentos = pd.get_dummies(visitas_com_conversao["departamento"])
-    result = visitas_com_conversao.join(departamentos).drop('departamento', axis=1)
+    #departamentos = pd.get_dummies(visitas_com_conversao["departamento"])
+    #result = visitas_com_conversao.join(departamentos).drop('departamento', axis=1)
 
-    return result
+    return visitas_com_conversao
 
 
 def filter_departamento(row, departamentos_lista: Sequence[str]):

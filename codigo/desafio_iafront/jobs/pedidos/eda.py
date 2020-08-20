@@ -5,9 +5,9 @@ import numpy as np
 from datetime import timedelta
 
 
-from desafio_iafront.data.dataframe_utils import read_csv
+from codigo.desafio_iafront.data.dataframe_utils import read_csv
 from utils import *
-from desafio_iafront.jobs.constants import DEPARTAMENTOS
+from codigo.desafio_iafront.jobs.constants import DEPARTAMENTOS
 from bokeh.plotting import figure, output_file
 from bokeh.io import output_file, save
 

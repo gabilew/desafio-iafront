@@ -4,10 +4,10 @@ from functools import partial
 import os
 import numpy as np
 
-from desafio_iafront.jobs.graphics.utils import hist
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
-from desafio_iafront.jobs.constants import FEATURES
+from codigo.desafio_iafront.jobs.graphics.utils import hist
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
+from codigo.desafio_iafront.jobs.constants import FEATURES
 from bokeh.plotting import figure, output_file
 from bokeh.layouts import gridplot
 

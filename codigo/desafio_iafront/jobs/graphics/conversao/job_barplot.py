@@ -3,9 +3,9 @@ from bokeh.io import output_file, save
 from functools import partial
 import os
 
-from desafio_iafront.jobs.graphics.utils import hist
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
+from codigo.desafio_iafront.jobs.graphics.utils import hist
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
 from bokeh.plotting import figure, output_file
 from bokeh.layouts import gridplot
 

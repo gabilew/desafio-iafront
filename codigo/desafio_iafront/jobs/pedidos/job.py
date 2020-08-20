@@ -4,8 +4,8 @@ import pandas as pd
 from datetime import timedelta
 
 
-from desafio_iafront.data.dataframe_utils import read_csv
-from desafio_iafront.jobs.pedidos.utils import *
+from codigo.desafio_iafront.data.dataframe_utils import read_csv
+from codigo.desafio_iafront.jobs.pedidos.utils import *
 
 @click.command()
 @click.option('--pedidos', type=click.Path(exists=True))

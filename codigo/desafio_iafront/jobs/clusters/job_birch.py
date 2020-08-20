@@ -3,11 +3,11 @@ from functools import partial
 import click
 import numpy as np
 
-from desafio_iafront.data.saving import save_partitioned
-from desafio_iafront.jobs.clusters.clusters import birch
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
-from desafio_iafront.jobs.constants import DEPARTAMENTOS
+from codigo.desafio_iafront.data.saving import save_partitioned
+from codigo.desafio_iafront.jobs.clusters.clusters import birch
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
+from codigo.desafio_iafront.jobs.constants import DEPARTAMENTOS
 
 @click.command()
 @click.option('--dataframe', type=click.Path(exists=True), help='caminho para os arquivos escalados')

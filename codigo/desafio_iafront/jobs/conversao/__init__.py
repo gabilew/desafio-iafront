@@ -1,1 +1,1 @@
-from desafio_iafront.jobs.conversao.job_conversao import main
+from codigo.desafio_iafront.jobs.conversao.job_conversao import main

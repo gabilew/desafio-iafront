@@ -5,11 +5,11 @@ from bokeh.io import output_file, save
 from functools import partial
 
 
-from desafio_iafront.jobs.graphics.utils import plot, plot_clusters
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
-from desafio_iafront.jobs.clusters.pca import pca
-from desafio_iafront.jobs.constants import DEPARTAMENTOS, NMAX_POINTS
+from codigo.desafio_iafront.jobs.graphics.utils import plot, plot_clusters
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
+from codigo.desafio_iafront.jobs.clusters.pca import pca
+from codigo.desafio_iafront.jobs.constants import DEPARTAMENTOS, NMAX_POINTS
 from bokeh.plotting import figure, output_file
 
 
@@ -27,11 +27,10 @@ def main(dataframe_path: str, saida: str, cluster_label, data_inicial, data_fina
     assert("reverse" not in dataframe_path)
 
     delta: timedelta = (data_final - data_inicial)
-    date_partitions = [data_inicial + timedelta(days=days) for days in range(0,delta.days+1,7)]
+    date_partitions = [data_inicial + timedelta(days=days) for days in range(0,delta.days+7,7)]
 
     count = 0 
     for data_i, data_f in zip(date_partitions[:-1], date_partitions[1:]):  
-      
         filter_function = partial(filter_date, data_inicial=data_i, data_final=data_f)
         _dataframe = read_partitioned_json(dataframe_path, filter_function=filter_function) 
         

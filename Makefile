@@ -132,23 +132,23 @@ run:
 
 	make scale TRANSFORM=${transform} 
 	mkdir -p "${PLOTS}/${transform}/semana1"
-	scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
-	scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
-	scatter --saida="${PLOTS}/${transform}/semana1/${transform}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${transform}
+	# scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
+	# scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
+	# scatter --saida="${PLOTS}/${transform}/semana1/${transform}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${transform}
 	
-	histogram --saida="${PLOTS}/${transform}/semana1/${transform}_hist.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=${transform}
+	# histogram --saida="${PLOTS}/${transform}/semana1/${transform}_hist.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --transform=${transform}
 
-	mkdir -p "${PLOTS}/${transform}/semana2"
-	scatter --saida="${PLOTS}/${transform}/semana2/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/07/2020' --data-final='15/07/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
-	scatter --saida="${PLOTS}/${transform}/semana2/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/07/2020' --data-final='15/07/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
-	scatter --saida="${PLOTS}/${transform}/semana2/${transform}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/07/2020' --data-final='15/07/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${transform}
+	# mkdir -p "${PLOTS}/${transform}/semana2"
+	# scatter --saida="${PLOTS}/${transform}/semana2/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/07/2020' --data-final='15/07/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
+	# scatter --saida="${PLOTS}/${transform}/semana2/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/07/2020' --data-final='15/07/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
+	# scatter --saida="${PLOTS}/${transform}/semana2/${transform}_frete-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/07/2020' --data-final='15/07/2020' --x_axis=frete --y_axis=prazo --cluster_label=convertido --transform=${transform}
 	
-	histogram --saida="${PLOTS}/${transform}/semana2/${transform}_hist.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/07/2020' --data-final='15/07/2020' --transform=${transform}
+	# histogram --saida="${PLOTS}/${transform}/semana2/${transform}_hist.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='08/07/2020' --data-final='15/07/2020' --transform=${transform}
 
 
 	
-	make cluster CLUSTER_METHOD=minibatchkmeans TRANSFORM=${transform} N_SAMPLES=1.0 DROP=True
-	make conversao CLUSTER_METHOD=minibatchkmeans TRANSFORM=${transform} N_SAMPLES=1.0 DROP=True
+	make cluster CLUSTER_METHOD=kmeans TRANSFORM=${transform} N_SAMPLES=1.0 DROP=True
+	make conversao CLUSTER_METHOD=kmeans TRANSFORM=${transform} N_SAMPLES=1.0 DROP=True
 	
 	make cluster CLUSTER_METHOD=dbscan TRANSFORM=${transform} N_SAMPLES=0.5 DROP=True
 

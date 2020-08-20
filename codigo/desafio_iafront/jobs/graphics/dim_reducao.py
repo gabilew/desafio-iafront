@@ -5,10 +5,10 @@ from bokeh.io import output_file, save
 from functools import partial
 
 
-from desafio_iafront.jobs.graphics.utils import plot_clusters
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import (filter_date)
-from desafio_iafront.jobs.constants import FEATURES, DEPARTAMENTOS, NMAX_POINTS
+from codigo.desafio_iafront.jobs.graphics.utils import plot_clusters
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import (filter_date)
+from codigo.desafio_iafront.jobs.constants import FEATURES, DEPARTAMENTOS, NMAX_POINTS
 from bokeh.plotting import figure, output_file, show
 from sklearn.manifold import TSNE
 

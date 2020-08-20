@@ -4,9 +4,9 @@ from bokeh.io import output_file, save
 from functools import partial
 
 
-from desafio_iafront.jobs.graphics.utils import set_color
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
+from codigo.desafio_iafront.jobs.graphics.utils import set_color
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
 from bokeh.plotting import figure, output_file,show
 
 @click.command()

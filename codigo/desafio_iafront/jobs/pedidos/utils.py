@@ -2,11 +2,11 @@ import pandas as pd
 import os
 
 
-from desafio_iafront.jobs.pedidos.constants import KEPT_COLUNS, COLUMN_RENAMES
-from desafio_iafront.data.dataframe_utils import read_csv, read_partitioned_json
-from desafio_iafront.data.saving import save_partitioned
-from desafio_iafront.jobs.pedidos.constants import SAVING_PARTITIONS
-from desafio_iafront.jobs.common import convert
+from codigo.desafio_iafront.jobs.pedidos.constants import KEPT_COLUNS, COLUMN_RENAMES
+from codigo.desafio_iafront.data.dataframe_utils import read_csv, read_partitioned_json
+from codigo.desafio_iafront.data.saving import save_partitioned
+from codigo.desafio_iafront.jobs.pedidos.constants import SAVING_PARTITIONS
+from codigo.desafio_iafront.jobs.common import convert
 
 def _prepare(pedidos_joined: pd.DataFrame) -> pd.DataFrame:
     # Remove colunas resultantes do merge

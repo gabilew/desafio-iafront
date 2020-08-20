@@ -1,4 +1,4 @@
-from desafio_iafront.jobs.constants import COLUNA_DATA, \
+from codigo.desafio_iafront.jobs.constants import COLUNA_DATA, \
     COLUNA_HORA, COLUNA_DEPARTAMENTO
 
 SAVING_PARTITIONS = [COLUNA_DEPARTAMENTO, COLUNA_DATA, COLUNA_HORA]

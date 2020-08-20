@@ -2,11 +2,11 @@ import click
 from bokeh.io import output_file, save
 from functools import partial
 
-from desafio_iafront.jobs.constants import  NMAX_POINTS
-from desafio_iafront.jobs.graphics.utils import plot, plot_clusters
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
-from desafio_iafront.jobs.clusters.pca import pca
+from codigo.desafio_iafront.jobs.constants import  NMAX_POINTS
+from codigo.desafio_iafront.jobs.graphics.utils import plot, plot_clusters
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
+from codigo.desafio_iafront.jobs.clusters.pca import pca
 from bokeh.plotting import figure, output_file
 
 @click.command()
