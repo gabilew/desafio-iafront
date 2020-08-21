@@ -142,14 +142,14 @@ Antes das análises da clusterização, é importante ressaltar que para utiliza
 Pelos métodos de redução 2D utilizados, os clusters (1 e 2) e (0 e 3) ficaram sobrepostos no espaço projetado. Olhando todos os instantes temporais juntos, há diferença significativa de conversão entre cada cluster para os 3 métodos de escalamento selecionados.
 
 As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
-<img source="figuras/maxabs_kmeans.png" width="50%" heigth="50%" />
-<img source="figuras/maxabs_kmeans_tsne.png" width="50%" heigth="50%" />
+<img source="figuras/maxabs_kmeans.png" width="50%" heigth="50%" >
+<img source="figuras/maxabs_kmeans_tsne.png" width="50%" heigth="50%" >
 
 A figura a seguir mostra a análise de conversão por dia para cada cluster com os dados escalados pelo MaxAbsScaler. O range de variação da taxa de conversão é de 4.5%. Nom mês de julho, pode-se observar uma possível periodicidade da queda da taxa de conversão porém, de forma geral, parece não haver uma tendência a periodicidade semanal. Os clusters 0 e 3 apresentam os menores percentuais de conversão no mês de junho. O cluster 2 apresenta uma taxa de conversão ligeiramente maior que a dos demais clusters
-<img source="figuras/maxabs_kmeans_lineplot.png" width="50%" heigth="50%" />
+<img source="figuras/maxabs_kmeans_lineplot.png" width="50%" heigth="50%" >
 
 A figura a seguir mostra a análise de conversão por dia para cada cluster para o RobustScaler. O cluster 1 teve um pico de conversão entre a primeira e a segunda semana de junho
-<img source="figuras/robust_kmeans_lineplot.png" width="50%" heigth="50%" />
+<img source="figuras/robust_kmeans_lineplot.png" width="50%" heigth="50%" >
 
 * AgglomerativeClustering
 #TODO
@@ -183,9 +183,11 @@ O Arquivo Makefile contém os jobs implementados seguindo o pipeline proposto:
  ``$ make pedidos --SOURCE=<source path> --DATA_INICIAL=<data incial> --DATA_FINAL=<data final>`` 
 
 * Para escalar os dados com método "transform":
+
 ``$ make scale SOURCE=<source path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
 
 *Para plotar os resultados escalados:
+
 ``$ make scale-plots SOURCE=<source path> PLOTS=<plots path> --DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
 
 *para clusterizar os dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method"
