@@ -58,27 +58,27 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
 
 * usando 01/06/2020 - 07/06/2020
 * preco x prazo: 
-[Normalizer](plots/normalize/semana1/normalize_preco-prazo), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-prazo), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-prazo), [RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-prazo) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-prazo).
+[Normalizer](plots/normalize/semana1/normalize_preco-prazo.html), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-prazo.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-prazo.html), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-prazo.html), [RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-prazo.html) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-prazo.html).
 
 * preco x frete: 
-[Normalizer](plots/normalize/semana1/normalize_preco-frete), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-frete), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-frete), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-frete),
-[RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-frete) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-frete).
+[Normalizer](plots/normalize/semana1/normalize_preco-frete.html), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-frete.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-frete.html), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-frete.html),
+[RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-frete.html) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-frete).html.
 
 * frete x prazo:
-[Normalizer](plots/normalize/semana1/normalize_frete-prazo), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_frete-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_frete-prazo), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_frete-prazo), [RobustScaler](plots/robust_scaler/semana1/robust_scaler_frete-prazo) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_frete-prazo).
+[Normalizer](plots/normalize/semana1/normalize_frete-prazo.html), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_frete-prazo.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_frete-prazo.html), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_frete-prazo.html), [RobustScaler](plots/robust_scaler/semana1/robust_scaler_frete-prazo.html) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_frete-prazo.html).
 
 * frete: 
-[Normalizer](plots/normalize/semana1/frete-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/frete-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/frete-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/frete-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/frete-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/frete-power_transformer_hist).
+[Normalizer](plots/normalize/semana1/frete-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana1/frete-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/frete-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana1/frete-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana1/frete-robust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana1/frete-power_transformer_hist.html).
 
 * preco:
-[Normalizer](plots/normalize/semana1/preco-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/preco-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/preco-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/preco-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/precorobust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/preco-power_transformer_hist).
+[Normalizer](plots/normalize/semana1/preco-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana1/preco-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/preco-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana1/preco-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana1/precorobust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana1/preco-power_transformer_hist.html).
 
 * prazo :
-[Normalizer](plots/normalize/semana1/prazo-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/prazo-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/prazo-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/prazo-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/prazo-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/prazo-power_transformer_hist).
+[Normalizer](plots/normalize/semana1/prazo-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana1/prazo-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/prazo-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana1/prazo-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana1/prazo-robust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana1/prazo-power_transformer_hist.html).
 
     
 * distância ao centroide mais próximo:
-[Normalizer](plots/normalize/semana1/coords-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/coords-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/coords-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/coords-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/coords-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/coords-power_transformer_hist).
+[Normalizer](plots/normalize/semana1/coord_distance-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana1/coord_distance-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/coord_distance-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana1/coord_distance-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana1/coord_distance-robust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana1/coord_distance-power_transformer_hist.html).
 
     -> O PowerTransformer deslocou a moda das distribuições de preco, prazo e frete para direita. Como as distribuições iniciais eram uniformes, o resultado da transformação não ficou muito Gaussiano. A distância mínima ao centroide e o tamanho da descrição ficaram com formato Gaussiano. O power transform não funcionou muito bem na quantidade de fotos, devido à sua natureza discreta e de baixa cardinalidade.
 
@@ -91,27 +91,27 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
     -> as variáveis preco, frete e prazo não tiveram variação siginificativa nos dados crus, nem transformados. 
 
  * preco x prazo: 
-[Normalizer](plots/normalize/semana2/normalize_preco-prazo), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_preco-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_preco-prazo), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_preco-prazo), [RobustScaler](plots/robust_scaler/semana2/robust_scaler_preco-prazo) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_preco-prazo).
+[Normalizer](plots/normalize/semana2/normalize_preco-prazo.html), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_preco-prazo.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_preco-prazo.html), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_preco-prazo.html), [RobustScaler](plots/robust_scaler/semana2/robust_scaler_preco-prazo.html) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_preco-prazo.html).
 
 * preco x frete: 
-[Normalizer](plots/normalize/semana2/normalize_preco-frete), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_preco-frete), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_preco-frete), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_preco-frete),
-[RobustScaler](plots/robust_scaler/semana2/robust_scaler_preco-frete) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_preco-frete).
+[Normalizer](plots/normalize/semana2/normalize_preco-frete.html), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_preco-frete.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_preco-frete.html), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_preco-frete.html),
+[RobustScaler](plots/robust_scaler/semana2/robust_scaler_preco-frete.html) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_preco-frete.html).
 
 * frete x prazo:
-[Normalizer](plots/normalize/semana2/normalize_frete-prazo), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_frete-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_frete-prazo), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_frete-prazo), [RobustScaler](plots/robust_scaler/semana2/robust_scaler_frete-prazo) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_frete-prazo).
+[Normalizer](plots/normalize/semana2/normalize_frete-prazo.html), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_frete-prazo.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_frete-prazo.html), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_frete-prazo.html), [RobustScaler](plots/robust_scaler/semana2/robust_scaler_frete-prazo.html) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_frete-prazo.html).
 
 * frete: 
-[Normalizer](plots/normalize/semana2/frete-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/frete-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/frete-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/frete-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/frete-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/frete-power_transformer_hist).
+[Normalizer](plots/normalize/semana2/frete-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana2/frete-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/frete-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana2/frete-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana2/frete-robust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana2/frete-power_transformer_hist.html).
 
 * preco:
-[Normalizer](plots/normalize/semana2/preco-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/preco-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/preco-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/preco-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/precorobust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/preco-power_transformer_hist).
+[Normalizer](plots/normalize/semana2/preco-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana2/preco-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/preco-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana2/preco-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana2/precorobust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana2/preco-power_transformer_hist.html).
 
 * prazo :
-[Normalizer](plots/normalize/semana2/prazo-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/prazo-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/prazo-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/prazo-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/prazo-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/prazo-power_transformer_hist).
+[Normalizer](plots/normalize/semana2/prazo-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana2/prazo-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/prazo-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana2/prazo-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana2/prazo-robust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana2/prazo-power_transformer_hist.html).
 
 ->  distância ao centroide mais próximo:
 -> há outliers mais extremos em relação à primeira semana. É possivel notar que a densidade ficou ligeiramente mais concentrada à direita no caso do RobustScaler em comparação ao StandardScaler.
-[Normalizer](plots/normalize/semana2/coords-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/coords-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/coords-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/coords-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/coords-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/coords-power_transformer_hist).
+[Normalizer](plots/normalize/semana2/coords-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana2/coords-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/coords-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana2/coords-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana2/coords-robust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana2/coords-power_transformer_hist.html).
 
 -> As variáveis utilizadas parecem uniformemente distribuídas e, não sofreram alterações no formato da distribuição, apenas no suporte. O Normalizer e o Power Transform alteraram principalmente o formato do frete e do prazo.  
  
@@ -173,6 +173,7 @@ Para o robustScaler, os clusters também ficaram sobrepostos tanto nos espaços 
 <img src="figuras/robust_wardagg_tsne.png" width="30%" heigth="30%" />
 
 Para esse algoritmo de clusterização, a taxa de conversão oscila bastante ao longo dos dias, com excessão do cluster 1 que se mantém estável na média da taxa de conversão do dataset. 
+
 <img src="figuras/robust_wardagg_lineplot.png" width="50%" heigth="50%" >
 
 OS dados escalados pelo PowerTransformer também ficaram sobrepostos.
