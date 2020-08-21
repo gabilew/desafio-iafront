@@ -3,6 +3,7 @@
 ### Objetivo: 
 analisar a conversão de visitas em pedidos de acordo com grupos semânticos gerados por clusterização.
 
+Os datasets resultantes da última tarefa estão [aqui](https://drive.google.com/drive/folders/1x8GiWaSFhgc3ccGDu-BmnKOhNXu46n9j?usp=sharing).
 ### Dados:
 Para cada visita há as seguintes informações: frete, prazo, preco, latitude e longitude. Além disso, também temos o id do produto com o qual, usando outra tabela, obtemos informações como numero de fotos e  tamanho da descrição.
 
@@ -62,7 +63,7 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
 
 * preco x frete: 
 [Normalizer](plots/normalize/semana1/normalize_preco-frete.html), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_preco-frete.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_preco-frete.html), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_preco-frete.html),
-[RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-frete.html) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-frete).html.
+[RobustScaler](plots/robust_scaler/semana1/robust_scaler_preco-frete.html) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_preco-frete.html).
 
 * frete x prazo:
 [Normalizer](plots/normalize/semana1/normalize_frete-prazo.html), [MinMaxScaler](plots/minmax_scaler/semana1/minmax_scaler_frete-prazo.html), [MaxAbsScaler](plots/maxabs_scaler/semana1/maxabs_scaler_frete-prazo.html), [StandardScaler](plots/standard_scaler/semana1/standard_scaler_frete-prazo.html), [RobustScaler](plots/robust_scaler/semana1/robust_scaler_frete-prazo.html) e [PowerTransformer](plots/power_transformer/semana1/power_transformer_frete-prazo.html).
@@ -109,11 +110,11 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
 * prazo :
 [Normalizer](plots/normalize/semana2/prazo-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana2/prazo-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/prazo-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana2/prazo-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana2/prazo-robust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana2/prazo-power_transformer_hist.html).
 
-->  distância ao centroide mais próximo:
--> há outliers mais extremos em relação à primeira semana. É possivel notar que a densidade ficou ligeiramente mais concentrada à direita no caso do RobustScaler em comparação ao StandardScaler.
+    ->  distância ao centroide mais próximo:
+    -> há outliers mais extremos em relação à primeira semana. É possivel notar que a densidade ficou ligeiramente mais concentrada à direita no caso do RobustScaler em comparação ao StandardScaler.
 [Normalizer](plots/normalize/semana2/coords-normalize_hist.html), [MinMaxScaler](plots/minmax_scaler/semana2/coords-minmax_scaler_hist.html), [MaxAbsScaler](plots/maxabs_scaler/semana2/coords-maxabs_scaler_hist.html), [StandardScaler](plots/standard_scaler/semana2/coords-standard_scaler_hist.html), [RobustScaler](plots/robust_scaler/semana2/coords-robust_scaler_hist.html) e [PowerTransformer](plots/power_transformer/semana2/coords-power_transformer_hist.html).
 
--> As variáveis utilizadas parecem uniformemente distribuídas e, não sofreram alterações no formato da distribuição, apenas no suporte. O Normalizer e o Power Transform alteraram principalmente o formato do frete e do prazo.  
+    -> As variáveis utilizadas parecem uniformemente distribuídas e, não sofreram alterações no formato da distribuição, apenas no suporte. O Normalizer e o Power Transform alteraram principalmente o formato do frete e do prazo.  
  
 Para próxima etapa, seguiremos com o MaxAbsScaler, RobustScaler e PowerTransformer. O standardRcaler foi descartado porque os dados não são gaussianos e o normalizer foi descartado pelo motivo já mencionado.
 
@@ -138,14 +139,14 @@ Antes das análises da clusterização, é importante ressaltar que para utiliza
 
 * K-means
 
-Pelos métodos de redução 2D utilizados, os clusters (1 e 2) e (0 e 3) ficaram sobrepostos no espaço projetado. Olhando todos os instantes temporais juntos, há diferença significativa de conversão entre cada cluster para os 3 métodos de escalamento selecionados.
+Pelos métodos de redução 2D utilizados, os clusters (1 e 2) e (0 e 3) ficaram sobrepostos no espaço projetado. Olhando todos os instantes temporais juntos, não há diferença significativa de conversão entre cada cluster para os 3 métodos de escalamento selecionados.
 
 As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
 
 <img src="figuras/maxabs_kmeans.png"  width="30%" heigth="30%" >
 <img src="figuras/maxabs_kmeans_tsne.png" width="30%" heigth="30%" >
 
-A figura a seguir mostra a análise de conversão por dia para cada cluster com os dados escalados pelo MaxAbsScaler. O range de variação da taxa de conversão é de 4.5%. Nom mês de julho, pode-se observar uma possível periodicidade da queda da taxa de conversão porém, de forma geral, parece não haver uma tendência a periodicidade semanal. Os clusters 0 e 3 apresentam os menores percentuais de conversão no mês de junho. O cluster 2 apresenta uma taxa de conversão ligeiramente maior que a dos demais clusters
+A figura a seguir mostra a análise de conversão por dia para cada cluster com os dados escalados pelo MaxAbsScaler. O range de variação da taxa de conversão é de 4.5%. No mês de julho, pode-se observar uma possível periodicidade da queda da taxa de conversão porém, de forma geral, parece não haver uma tendência à periodicidade semanal. Os clusters 0 e 3 apresentam os menores percentuais de conversão no mês de junho. O cluster 2 apresenta uma taxa de conversão ligeiramente maior que a dos demais clusters. 
 
 <img source="figuras/maxabs_kmeans_lineplot.png" width="50%" heigth="50%" >
 
@@ -190,7 +191,7 @@ As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
 
 (ocorreu um erro na legenda)
 
-O método Birch aplicado aos dados escalados pelo RobustScaler encontrou 3 clusters. O cluster verde apresenta conversão estável ao longo dos dias, enquanto os demais clusters apresentam perfis semelhantes, com algumas exceções como no início de julho (queda da conversão do cluster em vermelho) e final de julho (queda ta conversão média no cluster em azul)
+O método Birch aplicado aos dados escalados pelo RobustScaler encontrou 3 clusters. O cluster verde apresenta conversão estável ao longo dos dias, enquanto os demais clusters apresentam perfis semelhantes, com algumas exceções, possíveis outliers, como no início de julho (queda da conversão do cluster em vermelho) e final de julho (queda ta conversão média no cluster em azul).
 
 <img src="figuras/robust_birch_lineplot.png" width="50%" heigth="50%" > 
 
@@ -202,7 +203,7 @@ no caso do Power transform, embora a taxa de conversão diária tenha ficado na 
 * O OPTICS encontrou praticamente um único cluster (e vários clusters com poucos pontos) e seus resultados de conversão não serão incluídos nesta análise.
 
 Considerações finais:
-Os melhores resultados foram obitidos, usando o PowerTransform com o método Birch, uma vez que os clusters obtidos apresentaram curvas de conversão  porém os resultados ainda parecem muito ruidosos de forma que os grupos são pouco separados no espaço de features e não há um comportamento claro de conversão por grupo. É possível que uma análise rstrita por departamento se faça útil, restringindo o espaço de features. Além disso, embora na análise exploratória de dados (arquivo ../pedidos/eda.py) não se observe um padrão temporal por hora, é possível que, por cluster, esse padrão se torne evidente. Uma outra possibilidade é remover algumas features, como a quantidade de fotosou o tamanho da descirção do produto que podem ser irrelevantes. No entanto, a dimensão do espaço de features não é grande de forma a atrapalhar a performance de algoritmos de clusterização. 
+Os melhores resultados foram obitidos, usando o PowerTransform com o método Birch, uma vez que os clusters obtidos apresentaram curvas de conversão  porém os resultados ainda parecem muito ruidosos de forma que os grupos são pouco separados no espaço de features e não há um comportamento claro de conversão por grupo. Na maior parte dos clusters, a conversão oscila bastante ao longo dos dias, porém não foi observada evidente periodicidade. É possível que uma análise rstrita por departamento se faça útil, restringindo o espaço de features. Além disso, embora na análise exploratória de dados (arquivo ../pedidos/eda.py) não se observe um padrão temporal por hora, é possível que, por cluster, esse padrão se torne evidente. Uma outra possibilidade é remover algumas features, como a quantidade de fotosou o tamanho da descirção do produto que podem ser irrelevantes. No entanto, a dimensão do espaço de features não é grande de forma a atrapalhar a performance de algoritmos de clusterização. 
 
 Além disso, seria interessante verificar os centroides obtidos para computar a feature de coordenadas. Os clusters encontrados por cada método poderiam ter sido analisados também de forma univariada, fornecendo uma análise mais qualitativa para cada cluster.
 
