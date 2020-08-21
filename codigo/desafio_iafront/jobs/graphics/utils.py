@@ -10,7 +10,7 @@ def plot(dataframe: pd.DataFrame, x_axis, y_axis, cluster_label, title=""):
     colors = [set_color(_) for _ in clusters]
 
     p = figure(title=title)
-    p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors,  size=5, alpha=0.5)
+    p.scatter(dataframe[x_axis].tolist(), dataframe[y_axis].tolist(), fill_color=colors, legend_label=cluster_label, size=5, alpha=0.5)
 
     return p
 
