@@ -3,10 +3,10 @@ from bokeh.io import output_file, save
 from functools import partial
 
 
-from desafio_iafront.jobs.graphics.utils import plot
-from desafio_iafront.data.dataframe_utils import read_partitioned_json
-from desafio_iafront.jobs.common import filter_date
-
+from codigo.desafio_iafront.jobs.graphics.utils import plot
+from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
+from codigo.desafio_iafront.jobs.common import filter_date
+from bokeh.plotting import figure, output_file
 
 @click.command()
 @click.option('--dataframe-path', type=click.Path(exists=True))
@@ -23,7 +23,7 @@ def main(dataframe_path: str, saida: str, x_axis, y_axis, cluster_label, data_in
     output_file(saida)
 
     figura = plot(dataframe, x_axis, y_axis, cluster_label)
-
+    
     save(figura)
 
 
