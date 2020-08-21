@@ -220,11 +220,11 @@ O Arquivo Makefile contém os jobs implementados seguindo o pipeline proposto:
 
 * Para escalar os dados com método "transform":
 
-``$ make scale SOURCE=<source path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
+``$ make scale SOURCE=<source path> DATA=<nome do diretório para salvar novos arquivos> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
 
 *Para plotar os resultados escalados:
 
-``$ make scale-plots SOURCE=<source path> PLOTS=<plots path> --DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
+``$ make scale-plots SOURCE=<source path> PLOTS=<plots path> DATA=<nome do diretório para salvar novos arquivos> --DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> `` 
 
 *para clusterizar os dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method"
 
@@ -232,11 +232,11 @@ O Arquivo Makefile contém os jobs implementados seguindo o pipeline proposto:
 
 *para gerar gráficos e calcular a conversão dos dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method" utilizando a partição temporal "particao"
 
-``$ make conversao SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> CLUSTER_METHOD=<cluster_method> N_SAMPLES=<porcentagem de amostras usadas para plot> PARTICAO=<particao>``
+``$ make conversao SOURCE=<source path> PLOTS=<plots path> DATA=<nome do diretório para salvar novos arquivos> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> CLUSTER_METHOD=<cluster_method> N_SAMPLES=<porcentagem de amostras usadas para plot> PARTICAO=<particao>``
 
 * Para rodar o pipeline todo para uma transformação específica:
 
-``$ make run SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> transform=<transform>  N_SAMPLES=<porcentagem de amostras usadas> `` 
+``$ make run SOURCE=<source path> PLOTS=<plots path> DATA=<nome do diretório para salvar novos arquivos> DATA_INICIAL=<data incial> DATA_FINAL=<data final> transform=<transform>  N_SAMPLES=<porcentagem de amostras usadas> `` 
 
 * Para mais informações
 
