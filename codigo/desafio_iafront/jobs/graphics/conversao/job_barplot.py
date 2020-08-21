@@ -23,8 +23,7 @@ def main(dataframe_path: str, saida: str,  data_inicial,  data_final, transform)
     ncounts = [dataframe[dataframe['cluster_label']==cluster].convertido.mean()*100 for cluster in clusters]
     
     output_file(saida)
-    p = figure(x_range=clusters, plot_height=400, title=transform,
-            tools="")
+    p = figure(x_range=clusters, plot_height=400, title=transform)
 
     p.vbar(x=clusters, top=ncounts, width=0.9)
 
