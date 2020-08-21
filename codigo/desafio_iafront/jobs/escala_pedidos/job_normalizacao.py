@@ -12,13 +12,13 @@ from codigo.desafio_iafront.jobs.clusters.pca import pca
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]), help='mmenor data dos arquivos carregados')
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]), help='maior data dos arquivos carregados')
 @click.option('--departamentos', type=str, default="", help="Departamentos separados por virgula")
-def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos, get_dummies_departamentos= GET_DUMMIES_DEPARTAMENTOS):
+def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos):
     if len(departamentos) == 0:
         departamentos_lista = DEPARTAMENTOS
     else: 
         departamentos_lista = [departamento.strip() for departamento in departamentos.split(",")]
 
-    result = prepare_dataframe(departamentos_lista, visitas_com_conversao, data_inicial, data_final)
+    result = prepare_dataframe(departamentos_lista, visitas_com_conversao, data_inicial, data_final, get_dummies_departamentos= GET_DUMMIES_DEPARTAMENTOS)
     
     # Faz a escala dos valores
     print("Transformando valores")

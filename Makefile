@@ -44,13 +44,13 @@ help:
 	#############################################################################################################################################################	
 
 	@echo "		*cluster"
-	@echo "			Métodos de clusterização do sklearn.clusters implementado neste pipeline: [kmeans, dbscan, wardagg, birch, minibatchkmeans ." 
+	@echo "			Métodos de clusterização do sklearn.clusters implementado neste pipeline: [kmeans, dbscan, wardagg, opitcs, minibatchkmeans ." 
 	@echo "			observar o resultado da clusterização em scatter_plot (5 features reduzidas a 2 por pca)"
 	@echo "			Parâmetros"
 	@echo "			<DATA_INICIAL> e <DATA_FINAL> no formato dd/mm/yyyy"
 	@echo "			<DEPARTAMENTOS> : lista de departamentos separados por vírgula"
 	@echo "			<TRANSFORM> : nome do escalamento: [normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scalar, power_transform]"
-	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, birch, minibatchkmeans]"
+	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, opitcs, minibatchkmeans]"
 	@echo "			<N_SAMPLES> : percentual de amostras a serem utilizadas (são amostradas aleatoriamente)"
 	@echo "			<N_CLUSTERS> : número de clusters"
 	@echo "			<DROP> : Se as colunas de departamentos devem ser removidas"
@@ -64,11 +64,10 @@ help:
 	@echo "			<DATA_INICIAL> e <DATA_FINAL> no formato dd/mm/yyyy"
 	@echo "			<DEPARTAMENTOS> : lista de departamentos separados por vírgula"
 	@echo "			<TRANSFORM> : nome do escalamento: [normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scalar, power_transform]"
-	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, birch, minibatchkmeans]"
+	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, opitcs, minibatchkmeans]"
 	@echo "			<N_SAMPLES> : percentual de amostras a serem utilizadas (são amostradas aleatoriamente)"
 	#############################################################################################################################################################
-
-
+	
 	@echo "		*run"
 	@echo "			Roda todo pipeline utilizado para gerar os resultados deste desafio para um método de escalamento definito da variável 'transform' "
 	@echo " 		O pipeline não inclui o job {prepara-pedidos} visto que este é comum a todos os métodos de escalamento" 
@@ -78,7 +77,7 @@ help:
 	@echo "			<DATA_INICIAL> e <DATA_FINAL> no formato dd/mm/yyyy"
 	@echo "			<DEPARTAMENTOS> : lista de departamentos separados por vírgula"
 	@echo "			<TRANSFORM> : nome do escalamento: [normalize, maxabs_scaler, minmax_scaler, robust_scaler, standard_scalar, power_transform]"
-	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, birch, minibatchkmeans]"
+	@echo "			<CLUSTER_METHOD> : método de clusterização: [kmeans, dbscan, wardagg, opitcs, minibatchkmeans]"
 	@echo "			<N_SAMPLES> : percentual de amostras a serem utilizadas (são amostradas aleatoriamente)"
 	@echo "			<PARTICAO> : como calcular a conversão: por minuto, hora ou dia"
 	#############################################################################################################################################################	
@@ -130,7 +129,7 @@ conversao:
 
 run:
 
-	make scale TRANSFORM=${transform} 
+	#make scale TRANSFORM=${transform} 
 	mkdir -p "${PLOTS}/${transform}/semana1"
 	# scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-frete.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=frete --cluster_label=convertido --transform=${transform}
 	# scatter --saida="${PLOTS}/${transform}/semana1/${transform}_preco-prazo.html" --dataframe-path="${SOURCE}/scale/${transform}"  --data-inicial='01/06/2020' --data-final='08/06/2020' --x_axis=preco --y_axis=prazo --cluster_label=convertido --transform=${transform}
@@ -150,14 +149,14 @@ run:
 	make cluster CLUSTER_METHOD=kmeans TRANSFORM=${transform} N_SAMPLES=1.0 DROP=True
 	make conversao CLUSTER_METHOD=kmeans TRANSFORM=${transform} N_SAMPLES=1.0 DROP=True
 	
-	make cluster CLUSTER_METHOD=dbscan TRANSFORM=${transform} N_SAMPLES=0.5 DROP=True
+	make cluster CLUSTER_METHOD=dbscan TRANSFORM=${transform} N_SAMPLES=0.1 DROP=True
 
 
-	make cluster CLUSTER_METHOD=wardagg TRANSFORM=${transform} N_SAMPLES=0.5 DROP=True
-	make conversao CLUSTER_METHOD=wardagg TRANSFORM=${transform} N_SAMPLES=0.5 DROP=True
+	make cluster CLUSTER_METHOD=wardagg TRANSFORM=${transform} N_SAMPLES=0.01 DROP=True
+	make conversao CLUSTER_METHOD=wardagg TRANSFORM=${transform}  DROP=True
 	
-	make cluster CLUSTER_METHOD=birch TRANSFORM=${transform}  N_SAMPLES=1.0 DROP=True
-	make conversao  CLUSTER_METHOD=birch TRANSFORM=${transform}  N_SAMPLES=1.0 DROP=True
+	make cluster CLUSTER_METHOD=opitcs TRANSFORM=${transform}  N_SAMPLES=0.1 DROP=True
+	make conversao  CLUSTER_METHOD=opitcs TRANSFORM=${transform}  
 
 run-partial:
 	make scale TRANSFORM=${transform} 
