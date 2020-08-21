@@ -3,7 +3,7 @@ from sklearn.preprocessing import RobustScaler
 
 from codigo.desafio_iafront.data.saving import save_partitioned
 from codigo.desafio_iafront.jobs.common import prepare_dataframe, transform
-from codigo.desafio_iafront.jobs.constants import DEPARTAMENTOS 
+from codigo.desafio_iafront.jobs.constants import DEPARTAMENTOS,  GET_DUMMIES_DEPARTAMENTOS 
 from codigo.desafio_iafront.jobs.clusters.pca import pca
 
 @click.command()
@@ -12,7 +12,7 @@ from codigo.desafio_iafront.jobs.clusters.pca import pca
 @click.option('--data-inicial', type=click.DateTime(formats=["%d/%m/%Y"]))
 @click.option('--data-final', type=click.DateTime(formats=["%d/%m/%Y"]))
 @click.option('--departamentos', type=str, default="", help="Departamentos separados por virgula")
-def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos):
+def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos, get_dummies_departamentos= GET_DUMMIES_DEPARTAMENTOS):
     if len(departamentos) == 0:
         departamentos_lista = DEPARTAMENTOS
     else: 

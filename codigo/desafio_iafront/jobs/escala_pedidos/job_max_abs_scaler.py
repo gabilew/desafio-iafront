@@ -3,7 +3,7 @@ from sklearn.preprocessing import MaxAbsScaler
 
 from codigo.desafio_iafront.data.saving import save_partitioned
 from codigo.desafio_iafront.jobs.common import prepare_dataframe, transform
-from codigo.desafio_iafront.jobs.constants import DEPARTAMENTOS 
+from codigo.desafio_iafront.jobs.constants import DEPARTAMENTOS, GET_DUMMIES_DEPARTAMENTOS
 from codigo.desafio_iafront.jobs.clusters.pca import pca
 
 @click.command()
@@ -17,7 +17,7 @@ def main(visitas_com_conversao, saida, data_inicial, data_final, departamentos):
         departamentos_lista = DEPARTAMENTOS
     else: 
         departamentos_lista = [departamento.strip() for departamento in departamentos.split(",")]
-    result = prepare_dataframe(departamentos_lista, visitas_com_conversao, data_inicial, data_final)
+    result = prepare_dataframe(departamentos_lista, visitas_com_conversao, data_inicial, data_final, get_dummies_departamentos= GET_DUMMIES_DEPARTAMENTOS)
 
     # Faz a escala dos valores
     result_scaled = transform(result, MaxAbsScaler())

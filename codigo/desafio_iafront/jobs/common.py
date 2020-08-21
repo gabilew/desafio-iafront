@@ -9,7 +9,7 @@ from codigo.desafio_iafront.jobs.constants import FEATURES
 from sklearn.cluster import MiniBatchKMeans
 
 def prepare_dataframe(departamentos_lista: Sequence[str], dataset_path, data_inicial: datetime,
-                      data_final: datetime):
+                      data_final: datetime, get_dummies_departamentos: bool):
     def filter_function(row):
         return filter_departamento(row, departamentos_lista) and filter_date(row, data_inicial, data_final)
 
@@ -17,10 +17,13 @@ def prepare_dataframe(departamentos_lista: Sequence[str], dataset_path, data_ini
     visitas_com_coordenadas = _extracting_coordinates(visitas)
     visitas_com_coordenadas  = _coord_distance(visitas_com_coordenadas)
     visitas_com_conversao = convert(visitas_com_coordenadas)
-    #departamentos = pd.get_dummies(visitas_com_conversao["departamento"])
-    #result = visitas_com_conversao.join(departamentos).drop('departamento', axis=1)
-
-    return visitas_com_conversao
+    
+    if get_dummies_departamentos:
+        departamentos = pd.get_dummies(visitas_com_conversao["departamento"])
+        result = visitas_com_conversao.join(departamentos).drop('departamento', axis=1)
+    else:
+        result = visitas_com_conversao
+    return result
 
 
 def filter_departamento(row, departamentos_lista: Sequence[str]):
