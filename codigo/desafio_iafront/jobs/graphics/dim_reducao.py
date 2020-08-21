@@ -34,7 +34,7 @@ def main(dataframe_path: str, saida: str,  cluster_label, data_inicial, data_fin
     output_file(saida)
     #calcular as coordenadas utilizando t-distributed stochastic embedding
     #perplexity deveria ser uma variável global ou um argumento deste job
-    X_coords = TSNE(n_components=2, perplexity=60).fit_transform(np.asarray(list(dataframe[FEATURES].to_numpy()))).T
+    X_coords = TSNE(n_components=2, perplexity=80).fit_transform(np.asarray(list(dataframe[FEATURES].to_numpy()))).T
     dataframe['x_axis'] = X_coords[0]
     dataframe['y_axis'] = X_coords[1]
     dataframe['convertido'] = dataframe['convertido'].apply(lambda x: 'convertido' if x ==1 else 'não convertido')
