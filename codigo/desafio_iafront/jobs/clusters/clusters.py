@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN, MiniBatchKMeans, Birch
+from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN, MiniBatchKMeans, Birch, OPTICS
 
 
 def kmeans(vector: np.array, n: int):
@@ -18,12 +18,13 @@ def agg_clustering(vector: np.array, n: int):
     return None, cluster_label.labels_
 
 def dbscan(vector: np.array, n: int):
-    k = DBSCAN()
+    k = OPTICS(eps=2)
     cluster_label = k.fit(vector)
 
     return None, cluster_label.labels_
+    
 
-def birch(vector: np.array, n: int):
+def opitcs(vector: np.array, n: int):
     k = Birch()
     cluster_label = k.fit(vector)
 

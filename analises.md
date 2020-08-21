@@ -77,38 +77,44 @@ Este pre-processamento torna as variáveis mais parecidas com Gaussianas. Após 
 * prazo :
 [Normalizer](plots/normalize/semana1/prazo-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/prazo-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/prazo-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/prazo-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/prazo-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/prazo-power_transformer_hist).
 
+    
 * distância ao centroide mais próximo:
 [Normalizer](plots/normalize/semana1/coords-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana1/coords-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana1/coords-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana1/coords-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana1/coords-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana1/coords-power_transformer_hist).
 
+    -> O PowerTransformer deslocou a moda das distribuições de preco, prazo e frete para direita. Como as distribuições iniciais eram uniformes, o resultado da transformação não ficou muito Gaussiano. A distância mínima ao centroide e o tamanho da descrição ficaram com formato Gaussiano. O power transform não funcionou muito bem na quantidade de fotos, devido à sua natureza discreta e de baixa cardinalidade.
 
+    -> O normal
+    -> StandardScaler, MaxAbsScaler e MinMaxScaler, RobustScaler, não modificam o formato das distribuição como pode ser observado nos histogramas, apenas o range das variáveis é alterado.
+    -> Utilizando o Normalizer, frete x preco é trasformado em quase uma parábola, uma vez que seus valores apresentam  mesma magnitude. A distribuição do frete foi deslocada para direita (possui os maiores valores) enquanto a distribuição do prazo foi deslocada para esquerda. A distribuição do preco um formato simétrico. Note que a magnitude do prazo é muito menor que a do frete e do preco e, dessa forma, contribuirá menos para a clusterização. 
+    -> O PowerTransformer tende a Gaussianizar as variáveis, além de torná-las de média zero e variância unitária. Tanto o preco quanto o frete tiveram a densidade deslocada para direita, enquanto o prazo permaneceu com um formato de distribuição uniforme.
 
-* StandardScaler, MaxAbsScaler e MinMaxScaler, RobustScaler, não modificam o formato das distribuição como pode ser observado nos histogramas, apenas o range das variáveis é alterado.
-* Utilizando o Normalizer, frete x preco é trasformado em uma parábola. A distribuição do frete foi deslocada para direita enquanto a distribuição do prazo foi deslocada para esquerda. A distribuição do preco assumiu um formato bimodal (em 0.5 e 1). Note que a magnitude do prazo é muito menor que a do frete e do preco e, dessa forma, contribuirá menos para a clusterização. 
-* O PowerTransformer tende a Gaussianizar as variáveis, além de torná-la de média zero e variância unitária. Tanto o preco quanto o frete tiveram a densidade deslocada para direita, enquanto o prazo permaneceu com um formato de distribuição uniforme.
-* usando 08/06/2020 - 15/07/2020, nenhuma alteração evidente foi observada. No caso da Power transform, a distribuição do frete ficou mais concentrada à direita que não primeira semana de junho.
+* usando 08/07/2020 - 15/07/2020
+    -> as variáveis preco, frete e prazo não tiveram variação siginificativa nos dados crus, nem transformados. 
 
--> * preco x prazo: 
+ * preco x prazo: 
 [Normalizer](plots/normalize/semana2/normalize_preco-prazo), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_preco-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_preco-prazo), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_preco-prazo), [RobustScaler](plots/robust_scaler/semana2/robust_scaler_preco-prazo) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_preco-prazo).
 
--> * preco x frete: 
+* preco x frete: 
 [Normalizer](plots/normalize/semana2/normalize_preco-frete), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_preco-frete), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_preco-frete), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_preco-frete),
 [RobustScaler](plots/robust_scaler/semana2/robust_scaler_preco-frete) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_preco-frete).
 
--> * frete x prazo:
+* frete x prazo:
 [Normalizer](plots/normalize/semana2/normalize_frete-prazo), [MinMaxScaler](plots/minmax_scaler/semana2/minmax_scaler_frete-prazo), [MaxAbsScaler](plots/maxabs_scaler/semana2/maxabs_scaler_frete-prazo), [StandardScaler](plots/standard_scaler/semana2/standard_scaler_frete-prazo), [RobustScaler](plots/robust_scaler/semana2/robust_scaler_frete-prazo) e [PowerTransformer](plots/power_transformer/semana2/power_transformer_frete-prazo).
 
--> * frete: 
+* frete: 
 [Normalizer](plots/normalize/semana2/frete-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/frete-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/frete-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/frete-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/frete-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/frete-power_transformer_hist).
 
--> * preco:
+* preco:
 [Normalizer](plots/normalize/semana2/preco-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/preco-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/preco-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/preco-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/precorobust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/preco-power_transformer_hist).
 
--> * prazo :
+* prazo :
 [Normalizer](plots/normalize/semana2/prazo-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/prazo-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/prazo-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/prazo-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/prazo-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/prazo-power_transformer_hist).
 
--> * distância ao centroide mais próximo:
+->  distância ao centroide mais próximo:
+-> há outliers mais extremos em relação à primeira semana. É possivel notar que a densidade ficou ligeiramente mais concentrada à direita no caso do RobustScaler em comparação ao StandardScaler.
 [Normalizer](plots/normalize/semana2/coords-normalize_hist), [MinMaxScaler](plots/minmax_scaler/semana2/coords-minmax_scaler_hist), [MaxAbsScaler](plots/maxabs_scaler/semana2/coords-maxabs_scaler_hist), [StandardScaler](plots/standard_scaler/semana2/coords-standard_scaler_hist), [RobustScaler](plots/robust_scaler/semana2/coords-robust_scaler_hist) e [PowerTransformer](plots/power_transformer/semana2/coords-power_transformer_hist).
-* As variáveis utilizadas parecem uniformemente distribuídas e, não sofreram alterações no formato da distribuição, apenas no suporte. O Normalizer e o Power Transform alteraram principalmente o formato do frete e do prazo.  
+
+-> As variáveis utilizadas parecem uniformemente distribuídas e, não sofreram alterações no formato da distribuição, apenas no suporte. O Normalizer e o Power Transform alteraram principalmente o formato do frete e do prazo.  
  
 Para próxima etapa, seguiremos com o MaxAbsScaler, RobustScaler e PowerTransformer. O standardRcaler foi descartado porque os dados não são gaussianos e o normalizer foi descartado pelo motivo já mencionado.
 
@@ -120,15 +126,53 @@ Como o critério principal foi a escalabilidade, os algoritmos escolhidos foram:
 
 * Kmeans: apresenta grande escalabilidade e se baseia na distância entre pontos. Dessa forma, espera-se 4 grandes clusters para todos os scalings. Há também o MiniBatchKMeans que atualiza os centroides de maneira mais computacionalmente eficiente e, sem perder muita performance.
 * Birch: apresenta grande escalabilidade pois não guarda os dados na memória. Uma árvore de features é construída comprimindo os dados (por isso é utilizada para redução de dimensão). Esse algoritmo não escala bem para features, porém estamos utilizando muito poucas features.
-* DBSCAN: compara a densidade entre vizinhos. Embora seja considerado escalável, sua implementação no sckit-learn armazena uma matriz o que torna inviável. Assim, apenas 1% dos dados foram utilziados nessa clusterização. Uma alternativa é OPTICS #TODO
+* OPTICS: compara a densidade entre vizinhos. Embora seja considerado escalável, sua implementação no sckit-learn armazena uma matriz o que torna inviável. Assim, apenas 1% dos dados foram utilziados nessa clusterização. Uma alternativa é OPTICS #TODO
 * AgglomerativeClustering (com linkage=ward): reduz a variância dos clusters de forma hierárquica. Embora seja considerado escalável, também depende de computar uma matriz e, por isso o consumode memória é O(N^2). Dessa forma, apenas 1% dos dados foram utilizados. 
 
-####Resultados
+#### Resultados
 
-Os resultados da clusterização são apresentados em _scatter plots_ cuja dimensão foi reduzida do espaço de features (6 -> 2) pelo método de PCA tradicional e pelo t-distributed stochastic embedding (tSNE). O PCA mapeia as variáveis no novo espaço de forma linear, já o tSNE realiza um mapeamento não linear mniimizando a distância de Kullback-leiber entre as distribuições de probabilidade similaridade entre dois pontos no espaço original e esses mesmos pontos no espaço projetado. Algumas considerações importantes são: o parâmetro _perplexity_ está relacionado ao número de vizinhos a serem considerados. Quanto maior, mais agrupandos tendem a ficar os pontos (foi escolhido 60);  o número máximo de iterações também tem relação com a qualidade do resultado, quando poucas iterações são realizadas, os pontos ficam mais dispersos (foi deixado o valor default); A distância entre cluster no espaço projetado não possui siginificado (inclusive podem variar para cada _random state_). 
+Os resultados da clusterização são apresentados em _scatter plots_ cuja dimensão foi reduzida do espaço de features (6 -> 2) pelo método de PCA tradicional e pelo t-distributed stochastic embedding (tSNE). O PCA mapeia as variáveis no novo espaço de forma linear, já o tSNE realiza um mapeamento não linear mniimizando a distância de Kullback-Leiber entre as distribuições de probabilidade de similaridade entre dois pontos no espaço original e esses mesmos pontos no espaço projetado. Algumas considerações importantes são: o parâmetro _perplexity_ está relacionado ao número de vizinhos a serem considerados. Quanto maior, mais agrupandos tendem a ficar os pontos (foi escolhido 60);  o número máximo de iterações também tem relação com a qualidade do resultado, quando poucas iterações são realizadas, os pontos ficam mais dispersos (foi deixado o valor default); A distância entre cluster no espaço projetado não possui siginificado (inclusive podem variar para cada _random state_). 
 
-É importante ressaltar que a clusterização foi realizada no espaço original e os métodos de pca (linear) e tSNE (não linear) foram utilizados apenas para visualização.
+É importante ressaltar que a clusterização foi realizada no espaço original e os métodos de pca (linear) e tSNE (não linear) foram utilizados apenas para visualização. Em todos os algoritmos, o número de clusters foi escolhido como 4 devido ao pequeno número de variáveis (não foi feita uma busca por esse parâmetro). O método optics encontra o número de clusters. Para os 3 escalamentos testados, o número de clusters encontrado foi muito alto e talvez fosse necessário optimizar hiperparâmetros como o raio da vizinhança. além disso, o OPTICS clusteriza com base na comapração entre densidade de pontos na vizinhaça, como mesmo após o escalamento, os ponto parecem estar juntos, não seria estranho obter um único cluster por este método. 
 
+Antes das análises da clusterização, é importante ressaltar que para utilizar os métodos de AgglomerativeClustering e OPTICS, os dados foram reamostrados novamente para 10%. Além disso, todos os scatter_plots são amostrados para terem no máximo 50000 pontos.
+
+* K-means
+
+Pelos métodos de redução 2D utilizados, os clusters (1 e 2) e (0 e 3) ficaram sobrepostos no espaço projetado. Olhando todos os instantes temporais juntos, há diferença significativa de conversão entre cada cluster para os 3 métodos de escalamento selecionados.
+
+As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
+<img source="figuras/maxabs_kmeans.png" width="50%" heigth="50%" />
+<img source="figuras/maxabs_kmeans_tsne.png" width="50%" heigth="50%" />
+
+A figura a seguir mostra a análise de conversão por dia para cada cluster com os dados escalados pelo MaxAbsScaler. O range de variação da taxa de conversão é de 4.5%. Nom mês de julho, pode-se observar uma possível periodicidade da queda da taxa de conversão porém, de forma geral, parece não haver uma tendência a periodicidade semanal. Os clusters 0 e 3 apresentam os menores percentuais de conversão no mês de junho. O cluster 2 apresenta uma taxa de conversão ligeiramente maior que a dos demais clusters
+<img source="figuras/maxabs_kmeans_lineplot.png" width="50%" heigth="50%" />
+
+A figura a seguir mostra a análise de conversão por dia para cada cluster para o RobustScaler. O cluster 1 teve um pico de conversão entre a primeira e a segunda semana de junho
+<img source="figuras/robust_kmeans_lineplot.png" width="50%" heigth="50%" />
+
+* AgglomerativeClustering
+#TODO
+
+* Birch
+
+Apenas 2 clusters para o MaxAbsScaler foram encontrados. Os dois clusters oscilam suas conversões em valores razoavelmente próximos porém na segunda metade de julho o cluster verde atinge seu menores valores enquanto o cluster azul atinge valores mais altos.
+
+As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
+<img source="figuras/maxabs_birch_tsn.png" width="50%" heigth="50%" />
+
+<img source="figuras/maxabs_birch_lineplot.png" width="50%" heigth="50%" /> 
+(ocorreu um erro na legenda)
+
+* O OPTICS encontrou praticamente um único cluster (e vários clusters com poucos pontos) e seus resultados de conversão não serão incluídos nesta análise.
+
+Considerações finais:
+Os melhores resultados foram obitidos, usando o k-means com o RobustScaler porém os resultados ainda parecem muito ruidosos de forma que os grupos são pouco separados no espaço de features e não há um comportamento claro de conversão por grupo. É possível que uma análise rstrita por departamento se faça útil, restringindo o espaço de features. Além disso, embora na análise exploratória de dados (arquivo ../pedidos/eda.py) não se observe um padrão temporal por hora, é possível que, por cluster, esse padrão se torne evidente. Uma outra possibilidade é remover algumas features, como a quantidade de fotosou o tamanho da descirção do produto que podem ser irrelevantes. No entanto, a dimensão do espaço de features não é grande de forma a atrapalhar a performance de algoritmos de clusterização. 
+
+Além disso, seria interessante verificar os centroides obtidos para computar a feature de coordenadas. 
+
+
+É importante lembrar que os dados aqui trabalhados são 6% dos dados totais fornecidos e a amostragem foi realizada sem nenhum tipo de estratificação. Alguns algoritmos forma amostrados novamente para contornar problemas de memória. Alguns algoritmos implementados pelo scikit-learn, como o kmeans, por exemplo, permitem que novos pontos sejam classificados com base nos centroides já calculados e então os demais dados não utilizados poderiam ser classificados, os algoritmos baseados em densidade, por outro lado, não implementam esse método. No segundo caso, uma vez que se haja clusters bem definidos, estes podem ser utilizados para treinar um algoritmo de classificação que será capaz de indentificar a que grupo semântico uma nova visita pertence.
 
 ## Pipeline
 

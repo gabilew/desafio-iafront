@@ -4,7 +4,7 @@ import click
 import numpy as np
 
 from codigo.desafio_iafront.data.saving import save_partitioned
-from codigo.desafio_iafront.jobs.clusters.clusters import birch
+from codigo.desafio_iafront.jobs.clusters.clusters import opitcs
 from codigo.desafio_iafront.data.dataframe_utils import read_partitioned_json
 from codigo.desafio_iafront.jobs.common import filter_date
 from codigo.desafio_iafront.jobs.constants import DEPARTAMENTOS
@@ -28,11 +28,12 @@ def main(dataframe: str, number_of_cluster: int, saida: str, data_inicial, data_
         dataframe.drop(columns=drop_cols, inplace =True) 
     
     #utiliza apenas uma amostra dos dados
+
     if n_samples < 1:
         dataframe = dataframe.sample(n=int(n_samples*dataframe.shape[0]),  random_state=1).reset_index(drop=True)
-
+    
     vector = np.asarray(list(dataframe['features'].to_numpy()))
-    coordinates, labels = birch(vector, number_of_cluster)
+    coordinates, labels = opitcs(vector, number_of_cluster)
 
     dataframe['cluster_coordinate'] = None
 
