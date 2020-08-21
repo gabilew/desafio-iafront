@@ -151,29 +151,35 @@ A figura a seguir mostra a análise de conversão por dia para cada cluster com 
 
 A figura a seguir mostra a análise de conversão por dia para cada cluster para o RobustScaler. O cluster 1 teve um pico de conversão entre a primeira e a segunda semana de junho
 
-<img src="figuras/robust_kmeans_lineplot.png" width="30%" heigth="30%" >
+<img src="figuras/robust_kmeans_lineplot.png" width="50%" heigth="50%" >
 
 No caso do PowerTransformer, os clusters no espaço projetado ficaram bastante sobrepostos. 
-<img src="figuras/maxabs_kmeans.png" width="50%" heigth="30%" />
-<img src="figuras/maxabs_kmeans_tsne.png" width="50%" heigth="30%" />
+
+<img src="figuras/maxabs_kmeans.png" width="30%" heigth="30%" />
+<img src="figuras/maxabs_kmeans_tsne.png" width="30%" heigth="30%" />
 
 * AgglomerativeClustering
 Para o MaxAbsScaler, os clusters ficaram sobrepostos nos espaços projetados, especialmente os pares (1 e 2) e (0 e 3)
-<img src="figuras/maxabs_wardagg.png" width="50%" heigth="30%" />
-<img src="figuras/maxabs_wardagg_tsne.png" width="50%" heigth="30%" />
+
+<img src="figuras/maxabs_wardagg.png" width="30%" heigth="30%" />
+<img src="figuras/maxabs_wardagg_tsne.png" width="30%" heigth="30%" />
 
 Para esse algoritmo de clusterização, a taxa de conversão varia mais ao longo dos dias, especialmente para o cluster 3. 
-<img src="figuras/maxabs_wardagg_lineplot.png" width="30%" heigth="30%" >
+
+<img src="figuras/maxabs_wardagg_lineplot.png" width="50%" heigth="50%" >
 
 Para o robustScaler, os clusters também ficaram sobrepostos tanto nos espaços projetados.
-<img src="figuras/robust_wardagg_tsne.png" width="50%" heigth="30%" />
+
+<img src="figuras/robust_wardagg_tsne.png" width="30%" heigth="30%" />
 
 Para esse algoritmo de clusterização, a taxa de conversão oscila bastante ao longo dos dias, com excessão do cluster 1 que se mantém estável na média da taxa de conversão do dataset. 
-<img src="figuras/robuts_wardagg_lineplot.png" width="30%" heigth="30%" >
+<img src="figuras/robust_wardagg_lineplot.png" width="50%" heigth="50%" >
+
+OS dados escalados pelo PowerTransformer também ficaram sobrepostos.
 
 * Birch
 
-Apenas 2 clusters para o MaxAbsScaler foram encontrados. Os dois clusters oscilam suas conversões em valores razoavelmente próximos porém na segunda metade de julho o cluster verde atinge seu menores valores enquanto o cluster azul atinge valores mais altos.
+Apenas 2 clusters para o MaxAbsScaler foram encontrados. Os dois clusters oscilam suas conversões em valores razoavelmente próximos porém na segunda metade de julho o cluster verde atinge seus menores valores enquanto o cluster azul atinge valores mais altos.
 
 As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
 
@@ -183,6 +189,10 @@ As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
 
 (ocorreu um erro na legenda)
 
+O método Birch aplicado aos dados escalados pelo RobustScaler encontrou 3 clusters. O cluster verde apresenta conversão estável ao longo dos dias, enquanto os demais clusters apresentam perfis semelhantes, com algumas exceções como no início de julho (queda da conversão do cluster em vermelho) e final de julho (queda ta conversão média no cluster em azul)
+
+<img src="figuras/robust_birch_lineplot.png" width="50%" heigth="50%" > 
+
 no caso do Power transform, embora a taxa de conversão diária tenha ficado na média dos 15%, por dia, a taxa de conversão variou muito mais que nos demais casos. 
 <img src="figuras/pt_birch_boxplot.png" width="30%" heigth="30%" >
 
@@ -191,12 +201,12 @@ no caso do Power transform, embora a taxa de conversão diária tenha ficado na 
 * O OPTICS encontrou praticamente um único cluster (e vários clusters com poucos pontos) e seus resultados de conversão não serão incluídos nesta análise.
 
 Considerações finais:
-Os melhores resultados foram obitidos, usando o k-means com o RobustScaler porém os resultados ainda parecem muito ruidosos de forma que os grupos são pouco separados no espaço de features e não há um comportamento claro de conversão por grupo. É possível que uma análise rstrita por departamento se faça útil, restringindo o espaço de features. Além disso, embora na análise exploratória de dados (arquivo ../pedidos/eda.py) não se observe um padrão temporal por hora, é possível que, por cluster, esse padrão se torne evidente. Uma outra possibilidade é remover algumas features, como a quantidade de fotosou o tamanho da descirção do produto que podem ser irrelevantes. No entanto, a dimensão do espaço de features não é grande de forma a atrapalhar a performance de algoritmos de clusterização. 
+Os melhores resultados foram obitidos, usando o PowerTransform com o método Birch, uma vez que os clusters obtidos apresentaram curvas de conversão  porém os resultados ainda parecem muito ruidosos de forma que os grupos são pouco separados no espaço de features e não há um comportamento claro de conversão por grupo. É possível que uma análise rstrita por departamento se faça útil, restringindo o espaço de features. Além disso, embora na análise exploratória de dados (arquivo ../pedidos/eda.py) não se observe um padrão temporal por hora, é possível que, por cluster, esse padrão se torne evidente. Uma outra possibilidade é remover algumas features, como a quantidade de fotosou o tamanho da descirção do produto que podem ser irrelevantes. No entanto, a dimensão do espaço de features não é grande de forma a atrapalhar a performance de algoritmos de clusterização. 
 
-Além disso, seria interessante verificar os centroides obtidos para computar a feature de coordenadas. 
+Além disso, seria interessante verificar os centroides obtidos para computar a feature de coordenadas. Os clusters encontrados por cada método poderiam ter sido analisados também de forma univariada
 
 
-É importante lembrar que os dados aqui trabalhados são 6% dos dados totais fornecidos e a amostragem foi realizada sem nenhum tipo de estratificação. Alguns algoritmos forma amostrados novamente para contornar problemas de memória. Alguns algoritmos implementados pelo scikit-learn, como o kmeans, por exemplo, permitem que novos pontos sejam classificados com base nos centroides já calculados e então os demais dados não utilizados poderiam ser classificados, os algoritmos baseados em densidade, por outro lado, não implementam esse método. No segundo caso, uma vez que se haja clusters bem definidos, estes podem ser utilizados para treinar um algoritmo de classificação que será capaz de indentificar a que grupo semântico uma nova visita pertence.
+É importante lembrar que os dados aqui trabalhados correspondem a 6% dos dados totais fornecidos e a amostragem foi realizada sem nenhum tipo de estratificação. Alguns algoritmos forma amostrados novamente para contornar problemas de memória. Alguns algoritmos implementados pelo scikit-learn, como o kmeans, por exemplo, permitem que novos pontos sejam classificados com base nos centroides já calculados e então os demais dados não utilizados poderiam ser classificados, os algoritmos baseados em densidade, por outro lado, não implementam esse método. No segundo caso, uma vez que se haja clusters bem definidos, estes podem ser utilizados para treinar um algoritmo de classificação que será capaz de indentificar a que grupo semântico uma nova visita pertence.
 
 ## Pipeline
 
@@ -216,7 +226,7 @@ O Arquivo Makefile contém os jobs implementados seguindo o pipeline proposto:
 
 *para clusterizar os dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method"
 
-``$ make cluster SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> CLUSTER_METHOD=<cluster_method> N_SAMPLES=<porcentagem de amostras usadas> DROP<se deve dropar as colunas de departamentos>`` 
+``$ make cluster SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> TRANSFORM=<transform> CLUSTER_METHOD=<cluster_method> N_SAMPLES=<porcentagem de amostras usadas> `` 
 
 *para gerar gráficos e calcular a conversão dos dados escalados por "transform" utilizando o método de clsuterizacao "cluster_method" utilizando a partição temporal "particao"
 
@@ -224,4 +234,8 @@ O Arquivo Makefile contém os jobs implementados seguindo o pipeline proposto:
 
 * Para rodar o pipeline todo para uma transformação específica:
 
-``$ make run SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> transform=<transform>  N_SAMPLES=<porcentagem de amostras usadas> DROP<se deve dropar as colunas de departamentos>`` 
+``$ make run SOURCE=<source path> PLOTS=<plots path> DATA_INICIAL=<data incial> DATA_FINAL=<data final> transform=<transform>  N_SAMPLES=<porcentagem de amostras usadas> `` 
+
+* Para mais informações
+
+``$ make help``
