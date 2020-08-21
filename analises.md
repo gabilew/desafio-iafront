@@ -40,7 +40,6 @@ Foram utilizados os 6 escalamentos sugeridos
 #### Normalize:
 A transformação normalizer já implementada transforma cada linha de features de forma a ter norma 2 unitária. Essa transformação balanceia a contribuição de cada feature. Por exemplo, se o preço do produto for maior que o do frete, o preco do produto transformado será maior que o preco do frete. Note que há variáveis que não são comparáveis em magnitude, por exemplo, preco e prazo. Assim, essa transformação não faz muito sentido com as variáveis previamente selecionadas.
 
-[fig](../dataset-desafio-ia-front/plots/08062020-14062020/minmax_scaler_latitude-longitude.html)
 
 ### StandardScaler:
 Essa transformação torna a média zero e o desvio padrão unitário para cada vaŕiavel. A média e o desvio padrão são computados de forma global e são sensíveis a outliers. É utilizada quando os dados são provenientes a distribuição gaussiana.
@@ -142,14 +141,15 @@ Antes das análises da clusterização, é importante ressaltar que para utiliza
 Pelos métodos de redução 2D utilizados, os clusters (1 e 2) e (0 e 3) ficaram sobrepostos no espaço projetado. Olhando todos os instantes temporais juntos, há diferença significativa de conversão entre cada cluster para os 3 métodos de escalamento selecionados.
 
 As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
-<img source="figuras/maxabs_kmeans.png" width="50%" heigth="50%" >
-<img source="figuras/maxabs_kmeans_tsne.png" width="50%" heigth="50%" >
+
+<img src="figuras/maxabs_kmeans.png" width="30%" heigth="30%" >
+<img src="figuras/maxabs_kmeans_tsne.png" width="30%" heigth="30%" >
 
 A figura a seguir mostra a análise de conversão por dia para cada cluster com os dados escalados pelo MaxAbsScaler. O range de variação da taxa de conversão é de 4.5%. Nom mês de julho, pode-se observar uma possível periodicidade da queda da taxa de conversão porém, de forma geral, parece não haver uma tendência a periodicidade semanal. Os clusters 0 e 3 apresentam os menores percentuais de conversão no mês de junho. O cluster 2 apresenta uma taxa de conversão ligeiramente maior que a dos demais clusters
-<img source="figuras/maxabs_kmeans_lineplot.png" width="50%" heigth="50%" >
+<img source="figuras/maxabs_kmeans_lineplot.png" width="30%" heigth="30%" >
 
 A figura a seguir mostra a análise de conversão por dia para cada cluster para o RobustScaler. O cluster 1 teve um pico de conversão entre a primeira e a segunda semana de junho
-<img source="figuras/robust_kmeans_lineplot.png" width="50%" heigth="50%" >
+<img src="figuras/robust_kmeans_lineplot.png" width="30%" heigth="30%" >
 
 * AgglomerativeClustering
 #TODO
@@ -159,9 +159,9 @@ A figura a seguir mostra a análise de conversão por dia para cada cluster para
 Apenas 2 clusters para o MaxAbsScaler foram encontrados. Os dois clusters oscilam suas conversões em valores razoavelmente próximos porém na segunda metade de julho o cluster verde atinge seu menores valores enquanto o cluster azul atinge valores mais altos.
 
 As figuras a seguir mostram os resultado para o escalamento MaxAbsScaler
-<img source="figuras/maxabs_birch_tsn.png" width="50%" heigth="50%" />
+<img src="figuras/maxabs_birch_tsn.png" width="30%" heigth="30%" >
 
-<img source="figuras/maxabs_birch_lineplot.png" width="50%" heigth="50%" /> 
+<img src="figuras/maxabs_birch_lineplot.png" width="30%" heigth="30%" > 
 (ocorreu um erro na legenda)
 
 * O OPTICS encontrou praticamente um único cluster (e vários clusters com poucos pontos) e seus resultados de conversão não serão incluídos nesta análise.
